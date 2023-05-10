@@ -1,11 +1,12 @@
 module Main where
 
+import Controllers.CasaController (getCasaByID, getCasasJSON, getQuizByID)
+import Controllers.TabuleiroController (exibirTabuleiro, getTabuleiro, modificarTabuleiro)
 import Data.Char (toUpper)
 import GHC.IO.Handle (hClose)
 import System.Console.ANSI
 import System.IO
 import System.Random
-import Tabuleiro (exibirTabuleiro, getTabuleiro, modificarTabuleiro)
 
 main :: IO ()
 main = do

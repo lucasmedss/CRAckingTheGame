@@ -1,0 +1,60 @@
+[
+    {
+        "idCasa": 1,
+        "nome": "Nome casa 1",
+        "descricao": "Descricao da casa 1",
+        "requisitos": [
+            "Requisito 1",
+            "Requisito 2"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Pergunta 1",
+                "a": "Alternativa a",
+                "b": "Alternativa b",
+                "c": "Alternativa c",
+                "d": "Alternativa d",
+                "resposta": "Resposta 1"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Pergunta 2",
+                "a": "Alternativa a",
+                "b": "Alternativa b",
+                "c": "Alternativa c",
+                "d": "Alternativa d",
+                "resposta": "Resposta 2"
+            }
+        ]
+    },
+    {
+        "idCasa": 2,
+        "nome": "Nome da casa 2",
+        "descricao": "Descricao da casa 1",
+        "requisitos": [
+            "Requisito 1",
+            "Requisito 2"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Pergunta 1",
+                "a": "Alternativa a",
+                "b": "Alternativa b",
+                "c": "Alternativa c",
+                "d": "Alternativa d",
+                "resposta": "Resposta 1"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Pergunta 2",
+                "a": "Alternativa a",
+                "b": "Alternativa b",
+                "c": "Alternativa c",
+                "d": "Alternativa d",
+                "resposta": "Resposta 2"
+            }
+        ]
+    }
+]
