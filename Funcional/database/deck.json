@@ -1,0 +1,67 @@
+[
+    {
+        "tipo": "positiva",
+        "nome": "Minicurso de Linux do PET Computacao",
+        "descricao": "Voce participou do minicurso de linux oferecido pelo PET Computacao e agora sabe nocoes basicas do sistema e de comandos no bash"
+    },
+    {
+        "tipo": "positiva",
+        "nome": "Palestra de Carreiras do PET Computacao",
+        "descricao": "Você participou de uma palestra de carreiras oferecida pelo PET Computação e respondeu uma pergunta correta do palestrante!"
+    },
+    {
+        "tipo": "negativa",
+        "nome": "Quioscando",
+        "descricao": "Você passou tempo demais quioscando em Seu Hélio e Seu Olavo nesse período e acabou perdendo o tempo de algumas aulas, o que refletiu no seu rendimento!"
+    },
+    {
+        "tipo": "positiva",
+        "nome": "Café com Elas",
+        "descricao": "Você assistiu a uma mesa redonda promovida pelo Elas Computação e ficou muito inspirado a atuar mais no ambiente acadêmico de computação!"
+    },
+    {
+        "tipo": "positiva",
+        "nome": "Projetos com a OpenDev",
+        "descricao": "Você participou do desenvolvimento de alguns projetos open source com a OpenDev e ganhou experiência com desenvolvimento de software!"
+    },
+    {
+        "tipo": "positiva",
+        "nome": "Hacktoberfest",
+        "descricao": "Você passou o dia na universidade participando do Hacktoberfest que a OpenDev promoveu, assistindo minicursos e desenvolvendo projetos open source!"
+    },
+    {
+        "tipo": "negativa",
+        "nome": "Falha na Montagem",
+        "descricao": "Você ajudou os Guardians na montagem do LCC0 mas acabou montando um computador com um cabo de força desfiado que ao conectar na tomada derrubou a energia do prédio inteiro!"
+    },
+    {
+        "tipo": "positiva",
+        "nome": "LCC0",
+        "descricao": "Você participou do LCC0 e ajudou a organizar o evento, ganhando experiência com organização de eventos e com a comunidade de computação!"
+    },
+    {
+        "tipo": "negativa",
+        "nome": "Erro de Compilação",
+        "descricao": "Você cometeu um erro de compilação em um trabalho importante e acabou perdendo muitas horas tentando corrigir o problema, atrasando sua entrega e comprometendo sua nota na disciplina!"
+    },
+    {
+        "tipo": "positiva",
+        "nome": "Olimpíada de Programação",
+        "descricao": "Você participou da OBI e aprendeu muito sobre programação competitiva, ganhando experiência com algoritmos e estruturas de dados!"
+    },
+    {
+        "tipo": "negativa",
+        "nome": "Plágio",
+        "descricao": "Você foi acusado de plágio em um trabalho e acabou recebendo uma nota baixa, além de ter prejudicado sua reputação com seu professor!"
+    },
+    {
+        "tipo": "positiva",
+        "nome": "Participação no Grupo de Estudos",
+        "descricao": "Você se juntou a um grupo de estudos e conseguiu tirar dúvidas sobre alguns conceitos importantes da disciplina, melhorando seu aprendizado!"
+    },
+    {
+        "tipo": "negativa",
+        "nome": "Problema no Computador",
+        "descricao": "O disco de armazenamento do seu computador pifou e você perdeu todos os seus arquivos, incluindo alguns protótipos e códigos importantes!"
+    }
+]
