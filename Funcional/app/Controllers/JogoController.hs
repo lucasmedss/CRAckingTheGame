@@ -87,7 +87,7 @@ singlePlayer x tabuleiro requisitos = do
   limpaTela
   let casa = getCasaByID x getCasasJSON
   let requisitosCasa = Models.Casa.requisitos casa
-  putStrLn (show requisitosCasa)
+
   let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
   if todasAsDisciplinasCursadas then do
     resultado <- interacao tabuleiro casa requisitos
