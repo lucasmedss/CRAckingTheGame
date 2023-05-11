@@ -11,52 +11,75 @@ import Models.Casa
 import Models.Quiz
 import System.Console.ANSI
 import System.Random
-import Models.Casa (Casa(requisitos))
 
 iniciaJogo :: Int -> IO ()
 iniciaJogo 1 = singlePlayer 0 getTabuleiro []
+iniciaJogo 2 = multiplayer 0 0 1 getTabuleiro []
 
--- iniciaJogo 2 = multiplayer 0 1 getTabuleiro
+multiplayer :: Int -> Int -> Int -> [String] -> [String] -> IO ()
+multiplayer 33 _ _ _ _ = putStrLn "aeeee acabou o jogo"
+multiplayer 0 0 1 tabuleiro requisitos = do
+  limpaTela
+  putStrLn "Seja bem-vindo ao CRAcking the Game!"
+  exibirTabuleiro tabuleiro
+  putStrLn "Pressione ENTER para rolar o dado"
+  esperar <- getLine
+  dado <- rodaDado
+  putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar")
+  esperar <- getLine
+  limpaTela
+  let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show dado)
+  exibirTabuleiro novoTabuleiro
+  putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
+  esperar <- getLine
+  multiplayer dado 0 2 novoTabuleiro requisitos
+multiplayer x y 1 tabuleiro requisitos = do
+  limpaTela
+  let casa = getCasaByID x getCasasJSON
+  resultado <- interacao tabuleiro casa requisitos
+  if resultado
+    then do
+      putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
+      esperar <- getLine
+      limpaTela
+      exibirTabuleiro tabuleiro
+      dado <- rodaDado
+      -- Json.escreveTabuleiro ("x", resultado) -- PseudoCodigo
+      -- Json.historico . adicionaDisciplina (x) -- PseudoCodigo
+      putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar.")
+      esperar <- getLine
+      let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (dado + x))
+      exibirTabuleiro novoTabuleiro
+      putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
+      esperar <- getLine
+      multiplayer (x + dado) y 2 novoTabuleiro requisitos
+    else do
+      putStrLn "aaaawwww errou, vai voltar uma casa!"
+-- voltaCasaMultiplayer (x - 1)
+multiplayer x y 2 tabuleiro requisitos = do
+  interacaoBot x y 1 tabuleiro requisitos
 
--- multiplayer :: Int -> Int -> [String] -> IO ()
--- multiplayer 33 x tabueiro = putStrLn "aeeee acabou o jogo"
--- multiplayer 0 1 tabuleiro = do
---   putStrLn "Seja bem-vindo ao CRAcking the Game!"
---   exibirTabuleiro tabuleiro
---   putStrLn "Pressione ENTRER para rolar o dado"
---   input <- readLine
---   resultado <- rodaDado ()
---   modificarTabuleiro tabuleiro "X" resultado
---   multiplayer resultado 2
--- multiplayer x 1 tabuleiro = do
---   if interacao (x)
---     then do
---       putStrLn "Parabéns por ter acertado, digite 'roll' para ver quantas casas você vai avançar!"
---       input <- readLine
---       resultado <- rodaDado () + x
---       Json.escreveTabuleiro ("x", resultado) -- PseudoCodigo
---       Json.historico . adicionaDisciplina (x) -- PseudoCodigo
---       multiplayer (x + resultado) 2
---     else do
---       putStrLn "aaaawwww errou, vai voltar uma casa!"
---       voltaCasaMultiplayer (x - 1)
--- multiplayer x 2 tabuleiro= do
---   interacaoBot ()
---   multiplayer (x) 1
+interacaoBot :: Int -> Int -> Int -> [String] -> [String] -> IO ()
+interacaoBot x y jogador tabuleiro requisitos = do
+  -- randomNumber <- randomRIO (0, 2 :: Int)
+  let randomNumber = 0
+  if randomNumber == 0
+    then do
+      dado <- rodaDado
+      putStrLn ("O bot acertou a resposta e avançou " ++ show dado ++ " casas\nPessione ENTER para continuar.")
+      esperar <- getLine
+      let novaPosicao = dado + y
+      let novoTabuleiro = modificarTabuleiro tabuleiro "Y" (show novaPosicao)
+      exibirTabuleiro novoTabuleiro
+      multiplayer x novaPosicao 1 novoTabuleiro requisitos
+    else do
+      putStrLn "O bot errou e voltou uma casa"
+      let novaPosicao = if y > 1 then y - 1 else y
+      let novoTabuleiro = modificarTabuleiro tabuleiro "Y" (show novaPosicao)
+      multiplayer x novaPosicao 1 novoTabuleiro requisitos
 
--- interacaoBot :: IO ()
--- interacaoBot = do
---   randomNumber <- randomRIO (0, 2 :: Int)
---   if randomNumber == 0
---     then do
---       resultado <- rodaDado ()
---       putStrLn "O bot acertou e avançou " ++ resultado ++ " casas"
---       Json.escreveTabuleiro ("y", y + resultado) -- PseudoCodigo
---     else
---       putStrLn
---         "O bot errou e voltou uma casa"
---         Json.escreveTabuleiro
---         ("y", y - 1) -- PseudoCodigo
+-- Json.escreveTabuleiro
+-- ("y", y - 1) -- PseudoCodigo
 
 -- voltaCasaMultiplayer :: Int -> IO ()
 -- voltaCasaMultiplayer x = do
@@ -88,27 +111,28 @@ singlePlayer x tabuleiro requisitos = do
   let casa = getCasaByID x getCasasJSON
   let requisitosCasa = Models.Casa.requisitos casa
   let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
-  if todasAsDisciplinasCursadas then do
-    resultado <- interacao tabuleiro casa requisitos
-    if resultado
-      then do
-        putStrLn "Parabéns por ter obtido sucesso\nPressione ENTER para rolar o dado."
-        -- acertouCRA
-        esperar <- getLine
-        dado <- rodaDado
-        let novaPosicao = x + dado
-        putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
-        esperar <- getLine
-        let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show novaPosicao)
-        singlePlayer novaPosicao novoTabuleiro (requisitos ++ [nome casa])
-      else do
-        putStrLn "aaaawwww errou, vai voltar uma casa!"
-        voltaCasa (x - 1) tabuleiro requisitos
-  else do
-    exibirTabuleiro tabuleiro
-    putStrLn "Você não tem as disciplinas necessárias para avançar nessa casa!\nPressione ENTER para voltar uma casa."
-    esperar <- getLine
-    voltaCasa (x - 1) tabuleiro (requisitos ++ requisitosCasa)
+  if todasAsDisciplinasCursadas
+    then do
+      resultado <- interacao tabuleiro casa requisitos
+      if resultado
+        then do
+          putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
+          -- acertouCRA
+          esperar <- getLine
+          dado <- rodaDado
+          let novaPosicao = x + dado
+          putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
+          esperar <- getLine
+          let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show novaPosicao)
+          singlePlayer novaPosicao novoTabuleiro (requisitos ++ [nome casa])
+        else do
+          putStrLn "aaaawwww errou, vai voltar uma casa!"
+          voltaCasa (x - 1) tabuleiro requisitos
+    else do
+      exibirTabuleiro tabuleiro
+      putStrLn "Você não tem as disciplinas necessárias para avançar nessa casa!\nPressione ENTER para voltar uma casa."
+      esperar <- getLine
+      voltaCasa (x - 1) tabuleiro (requisitos ++ requisitosCasa)
 
 -- errouCRA
 -- voltaCasa (x - 1)
@@ -123,7 +147,7 @@ interacao tabuleiro casa requisitos = do
       putStrLn "Não tem quiz"
       return True
     else do
-      executaQuiz quizCasa 
+      executaQuiz quizCasa
 
 -- requisitos <- Json.getRequisitos (x)
 -- disciplinasCursada <- Json.historico . getDisciplinasCursadas ()
@@ -171,7 +195,7 @@ limpaTela = do
 
 -- executaAcaoNegativa :: IO ()
 -- executaAcaoNegativa
---   | 
+--   |
 --   |
 -- -- Vários casamentos de padrão com o resultado do numero aleatorio.
 

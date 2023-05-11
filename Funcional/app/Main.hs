@@ -29,9 +29,11 @@ menu tabuleiro = do
     "1" -> do
       putStrLn "Jogar"
       iniciaJogo 1
+      menu tabuleiro
     "2" -> do
       putStrLn "Jogar contra o Bot"
       iniciaJogo 2
+      menu tabuleiro
     "3" -> do
       putStrLn "Obrigado por jogar CRAcking the Game\nAté mais!"
       return ()
