@@ -37,7 +37,8 @@ getPosicao tabuleiro casa = do
   (linha, coluna)
 
 modificarTabuleiro :: [String] -> String -> String -> [String]
-modificarTabuleiro tabuleiro jogador proximaPosicao = do
+modificarTabuleiro tabuleiro jogador posicao = do
+  let proximaPosicao = if read posicao > 33 then "CC" else posicao
   let atual = getPosicao tabuleiro jogador
   let linhaTabuleiro = tabuleiro !! fst atual
   let novaLinha = replaceChar (snd atual) " " linhaTabuleiro
