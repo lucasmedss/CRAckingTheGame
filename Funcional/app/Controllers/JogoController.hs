@@ -104,12 +104,6 @@ voltaCasaMultiplayer x y jogador tabuleiro requisitos = do
   multiplayer x y 2 novoTabuleiro requisitos
 
 singlePlayer :: Int -> [String] -> [String] -> IO ()
-singlePlayer 33 tabuleiro requisitos = do
-  let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
-  exibirTabuleiro novoTabuleiro
-  putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
-  esperar <- getLine
-  return ()
 singlePlayer 0 tabuleiro requisitos = do
   limpaTela
   putStrLn "Seja bem-vindo ao CRAcking the Game!\nVamos começar!\n"
@@ -151,6 +145,40 @@ singlePlayer x tabuleiro requisitos = do
       putStrLn "Você não tem as disciplinas necessárias para avançar nessa casa!\nPressione ENTER para voltar uma casa."
       esperar <- getLine
       voltaCasa (x - 1) tabuleiro (requisitos ++ requisitosCasa)
+  if x >= 33
+    then do
+      let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
+      exibirTabuleiro novoTabuleiro
+      putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
+      esperar <- getLine
+      return ()
+    else do
+      limpaTela
+      let casa = getCasaByID x getCasasJSON
+      let requisitosCasa = Models.Casa.requisitos casa
+      let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
+      if todasAsDisciplinasCursadas
+        then do
+          resultado <- interacao tabuleiro casa requisitos
+          if resultado
+            then do
+              putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
+              -- acertouCRA
+              esperar <- getLine
+              dado <- rodaDado
+              let novaPosicao = x + dado
+              putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
+              esperar <- getLine
+              let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show novaPosicao)
+              singlePlayer novaPosicao novoTabuleiro (requisitos ++ [nome casa])
+            else do
+              putStrLn "aaaawwww errou, vai voltar uma casa!"
+              voltaCasa (x - 1) tabuleiro requisitos
+        else do
+          exibirTabuleiro tabuleiro
+          putStrLn "Você não tem as disciplinas necessárias para avançar nessa casa!\nPressione ENTER para voltar uma casa."
+          esperar <- getLine
+          voltaCasa (x - 1) tabuleiro (requisitos ++ requisitosCasa)
 
 -- errouCRA
 -- voltaCasa (x - 1)
