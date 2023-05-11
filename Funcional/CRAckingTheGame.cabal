@@ -26,6 +26,7 @@ executable CRAckingTheGame
     other-modules:    Controllers.CasaController,
                       Controllers.TabuleiroController,
                       Models.Casa,
+                      Models.Carta,
                       Models.Quiz
 
     -- LANGUAGE extensions used by modules in this package.
@@ -36,6 +37,7 @@ executable CRAckingTheGame
                       bytestring,
                       directory,
                       random,
+                      random-shuffle,
                       text
     hs-source-dirs:   app
     default-language: Haskell2010
