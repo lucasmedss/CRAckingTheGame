@@ -27,9 +27,11 @@ executable CRAckingTheGame
                       Controllers.DeckController,
                       Controllers.JogoController,
                       Controllers.TabuleiroController,
+                      Controllers.CraController,
                       Models.Casa,
                       Models.Carta,
-                      Models.Quiz
+                      Models.Quiz,
+                      Models.Nota
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:

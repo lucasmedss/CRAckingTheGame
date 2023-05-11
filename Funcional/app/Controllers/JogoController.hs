@@ -87,7 +87,6 @@ singlePlayer x tabuleiro requisitos = do
   limpaTela
   let casa = getCasaByID x getCasasJSON
   let requisitosCasa = Models.Casa.requisitos casa
-
   let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
   if todasAsDisciplinasCursadas then do
     resultado <- interacao tabuleiro casa requisitos
@@ -151,14 +150,29 @@ limpaTela = do
   clearScreen
   setCursorPosition 0 0
 
--- executaCasaComplementar :: String -> IO ()
--- executaCasaComplementar "positivo" = executaAcaoPositiva randomRIO (A, B)
--- executaCasaComplementar "negativo" = executaAcaoNegativa randomRIO (A, B)
+-- executaCasaComplementar :: String -> Int -> IO ()
+-- executaCasaComplementar tipoCarta idPlayer = do
+--   if (idPlayer == 1) then do
+--     if (tipoCarta == "positiva") then do
+--       executaAcaoPositiva "humano"
+--     else do
+--       executaAcaoNegativa "humano"
+--   else do
+--     if (tipoCarta == "positiva") then do
+--       executaAcaoPositiva "bot"
+--     else do
+--       executaAcaoNegativa "bot"
 
--- executaAcaoPositiva :: IO ()
+-- executaAcaoPositiva ::  IO ()
+-- executaAcaoNegativa
+--   |
+--   |
 -- -- Vários casamentos de padrão com o resultado do numero aleatorio.
 
 -- executaAcaoNegativa :: IO ()
+-- executaAcaoNegativa
+--   | 
+--   |
 -- -- Vários casamentos de padrão com o resultado do numero aleatorio.
 
 voltaCasa :: Int -> [String] -> [String] -> IO ()
