@@ -1,8 +1,8 @@
 module Main where
 
 import Controllers.CasaController (getCasaByID, getCasasJSON, getQuizByID)
+import Controllers.JogoController (iniciaJogo)
 import Controllers.TabuleiroController (exibirTabuleiro, getTabuleiro, modificarTabuleiro)
-import Data.Char (toUpper)
 import GHC.IO.Handle (hClose)
 import System.Console.ANSI
 import System.IO
@@ -22,11 +22,14 @@ menu tabuleiro = do
   putStrLn conteudo
   hClose arquivo
   opcao <- getLine
-  case map toUpper opcao of
-    "J" -> do
+  case opcao of
+    "1" -> do
       putStrLn "Jogar"
-      jogar tabuleiro 0
-    "S" -> do
+      iniciaJogo 1
+    "2" -> do
+      putStrLn "Jogar contra o Bot"
+      iniciaJogo 2
+    "3" -> do
       putStrLn "Obrigado por jogar CRAcking the Game\nAté mais!"
       return ()
     _ -> do
@@ -40,13 +43,13 @@ jogar tabuleiro atual = do
   let novaPosicao = atual + dado
   if novaPosicao >= 33
     then do
-      let novoTabuleiro = modificarTabuleiro tabuleiro "CC"
+      let novoTabuleiro = modificarTabuleiro tabuleiro "Y" "CC"
       exibirTabuleiro novoTabuleiro
       putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
       esperar <- getLine
       main
     else do
-      let novoTabuleiro = modificarTabuleiro tabuleiro (show novaPosicao)
+      let novoTabuleiro = modificarTabuleiro tabuleiro "Y" (show novaPosicao)
       putStrLn ("Você tirou: " ++ show dado ++ "\nPressione ENTER para continuar")
       esperar <- getLine
       jogar novoTabuleiro novaPosicao

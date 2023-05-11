@@ -14,8 +14,6 @@ getTabuleiro = do
 
 exibirTabuleiro :: [String] -> IO ()
 exibirTabuleiro tabuleiro = do
-  clearScreen
-  setCursorPosition 0 0
   putStrLn (unlines tabuleiro)
 
 getLinha :: [String] -> String -> Int -> Int
@@ -38,16 +36,18 @@ getPosicao tabuleiro casa = do
   let coluna = getColuna (tabuleiro !! linha) casa
   (linha, coluna)
 
-modificarTabuleiro :: [String] -> String -> [String]
-modificarTabuleiro tabuleiro proximaPosicao = do
-  let atual = getPosicao tabuleiro "X"
+modificarTabuleiro :: [String] -> String -> String -> [String]
+modificarTabuleiro tabuleiro jogador proximaPosicao = do
+  let atual = getPosicao tabuleiro jogador
   let linhaTabuleiro = tabuleiro !! fst atual
   let novaLinha = replaceChar (snd atual) " " linhaTabuleiro
   let novoTabuleiro = intercalate "\n" (take (fst atual) tabuleiro ++ [novaLinha] ++ drop (fst atual + 1) tabuleiro)
 
   let proximoAtual = getPosicao (lines novoTabuleiro) (printf "%02s" proximaPosicao)
+  let posicaoJogador = if jogador == "X" then snd proximoAtual + 1 else snd proximoAtual
+
   let proximaLinhaTabuleiro = lines novoTabuleiro !! (fst proximoAtual - 1)
-  let proximaNovaLinha = replaceChar (snd proximoAtual + 1) "X" proximaLinhaTabuleiro
+  let proximaNovaLinha = replaceChar posicaoJogador jogador proximaLinhaTabuleiro
   let proximoNovoTabuleiro = intercalate "\n" (take (fst proximoAtual - 1) (lines novoTabuleiro) ++ [proximaNovaLinha] ++ drop (fst proximoAtual) (lines novoTabuleiro))
   return proximoNovoTabuleiro
 
