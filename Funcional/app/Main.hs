@@ -8,6 +8,9 @@ import System.Console.ANSI
 import System.IO
 import System.Random
 
+
+
+
 main :: IO ()
 main = do
   menu getTabuleiro

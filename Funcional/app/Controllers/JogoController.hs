@@ -11,9 +11,10 @@ import Models.Casa
 import Models.Quiz
 import System.Console.ANSI
 import System.Random
+import Models.Casa (Casa(requisitos))
 
 iniciaJogo :: Int -> IO ()
-iniciaJogo 1 = singlePlayer 0 getTabuleiro
+iniciaJogo 1 = singlePlayer 0 getTabuleiro []
 
 -- iniciaJogo 2 = multiplayer 0 1 getTabuleiro
 
@@ -64,14 +65,14 @@ iniciaJogo 1 = singlePlayer 0 getTabuleiro
 --   Json.escreveTabuleiro ("x", x) -- PseudoCodigo
 --   multiplayer x 2
 
-singlePlayer :: Int -> [String] -> IO ()
-singlePlayer 33 tabuleiro = do
+singlePlayer :: Int -> [String] -> [String] -> IO ()
+singlePlayer 33 tabuleiro requisitos = do
   let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
   exibirTabuleiro novoTabuleiro
   putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
   esperar <- getLine
   return ()
-singlePlayer 0 tabuleiro = do
+singlePlayer 0 tabuleiro requisitos = do
   limpaTela
   putStrLn "Seja bem-vindo ao CRAcking the Game!\nVamos começar!\n"
   exibirTabuleiro tabuleiro
@@ -81,32 +82,40 @@ singlePlayer 0 tabuleiro = do
   putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
   esperar <- getLine
   let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show dado)
-  singlePlayer dado novoTabuleiro
-singlePlayer x tabuleiro = do
+  singlePlayer dado novoTabuleiro requisitos
+singlePlayer x tabuleiro requisitos = do
   limpaTela
   let casa = getCasaByID x getCasasJSON
-  resultado <- interacao tabuleiro casa
-  if resultado
-    then do
-      putStrLn "Parabéns por ter obtido sucesso\nPressione ENTER para rolar o dado."
-      -- Json.historico . add (x) -- PseudoCodigo
-      -- acertouCRA
-      esperar <- getLine
-      dado <- rodaDado
-      let novaPosicao = x + dado
-      putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
-      esperar <- getLine
-      let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show novaPosicao)
-      singlePlayer novaPosicao novoTabuleiro
-    else do
-      putStrLn "aaaawwww errou, vai voltar uma casa!"
-      voltaCasa (x - 1) tabuleiro
+  let requisitosCasa = Models.Casa.requisitos casa
+  putStrLn (show requisitosCasa)
+  let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
+  if todasAsDisciplinasCursadas then do
+    resultado <- interacao tabuleiro casa requisitos
+    if resultado
+      then do
+        putStrLn "Parabéns por ter obtido sucesso\nPressione ENTER para rolar o dado."
+        -- acertouCRA
+        esperar <- getLine
+        dado <- rodaDado
+        let novaPosicao = x + dado
+        putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
+        esperar <- getLine
+        let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show novaPosicao)
+        singlePlayer novaPosicao novoTabuleiro (requisitos ++ [nome casa])
+      else do
+        putStrLn "aaaawwww errou, vai voltar uma casa!"
+        voltaCasa (x - 1) tabuleiro requisitos
+  else do
+    exibirTabuleiro tabuleiro
+    putStrLn "Você não tem as disciplinas necessárias para avançar nessa casa!\nPressione ENTER para voltar uma casa."
+    esperar <- getLine
+    voltaCasa (x - 1) tabuleiro (requisitos ++ requisitosCasa)
 
 -- errouCRA
 -- voltaCasa (x - 1)
 
-interacao :: [String] -> Casa -> IO Bool
-interacao tabuleiro casa = do
+interacao :: [String] -> Casa -> [String] -> IO Bool
+interacao tabuleiro casa requisitos = do
   putStrLn (show (descricao casa))
   exibirTabuleiro tabuleiro
   let quizCasa = quiz casa
@@ -115,7 +124,7 @@ interacao tabuleiro casa = do
       putStrLn "Não tem quiz"
       return True
     else do
-      executaQuiz quizCasa
+      executaQuiz quizCasa 
 
 -- requisitos <- Json.getRequisitos (x)
 -- disciplinasCursada <- Json.historico . getDisciplinasCursadas ()
@@ -152,8 +161,8 @@ limpaTela = do
 -- executaAcaoNegativa :: IO ()
 -- -- Vários casamentos de padrão com o resultado do numero aleatorio.
 
-voltaCasa :: Int -> [String] -> IO ()
-voltaCasa x tabuleiro = do
+voltaCasa :: Int -> [String] -> [String] -> IO ()
+voltaCasa x tabuleiro requisitos = do
   let novoTabuleiroErro = modificarTabuleiro tabuleiro "X" (show x)
   limpaTela
   exibirTabuleiro novoTabuleiroErro
@@ -163,7 +172,7 @@ voltaCasa x tabuleiro = do
   putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
   esperar <- getLine
   let novoTabuleiro = modificarTabuleiro novoTabuleiroErro "X" (show (x + dado))
-  singlePlayer (dado + x) novoTabuleiro
+  singlePlayer (dado + x) novoTabuleiro requisitos
 
 rodaDado :: IO Int
 rodaDado = randomRIO (1, 4)
