@@ -7,9 +7,11 @@ module Controllers.JogoController where
 
 import Controllers.CasaController (getCasaByID, getCasasJSON, getQuizByID)
 import Controllers.TabuleiroController (exibirTabuleiro, getTabuleiro, modificarTabuleiro)
+import Controllers.DeckController (getDeckJSON, compraCarta, moveCarta, getCartaById)
 import Data.Int (Int)
 import Models.Casa
 import Models.Casa (Casa (requisitos))
+import Models.Carta
 import Models.Quiz
 import System.Console.ANSI
 import System.Random
@@ -100,7 +102,6 @@ multiplayer x y 2 tabuleiro requisitos = do
 
 interacaoBot :: Int -> Int -> Int -> [String] -> [String] -> IO ()
 interacaoBot x y jogador tabuleiro requisitos = do
-  --randomNumber <- randomRIO (0, 2 :: Int)
   let randomNumber = 0 
   if randomNumber == 0
     then do
@@ -114,7 +115,6 @@ interacaoBot x y jogador tabuleiro requisitos = do
       multiplayer x novaPosicao 1 novoTabuleiro requisitos
     else do
       putStrLn "O bot errou e voltou uma casa"
-      -- let novaPosicao = if y > 1 then y - 1 else y
       let novoTabuleiro = modificarTabuleiro tabuleiro "Y" (show (y - 1))
       multiplayer x (y - 1) 1 novoTabuleiro requisitos
 
@@ -185,27 +185,34 @@ singlePlayer x tabuleiro requisitos = do
           limpaTela
           singlePlayer (x - 1) novoTabuleiroErro requisitos
 
-      
-
--- errouCRA
--- voltaCasa (x - 1)
-
 interacao :: [String] -> Casa -> [String] -> IO Bool
 interacao tabuleiro casa requisitos = do
   limpaTela
   putStrLn (show (descricao casa))
   exibirTabuleiro tabuleiro
-  let quizCasa = quiz casa
-  if null quizCasa
+  let nomeCasa = nome casa
+  if (nomeCasa == "Casa Complementar")
     then do
-      putStrLn "Não tem quiz"
-      return True
+      dado <- rodaDadoCarta
+      let cartaComprada = getCartaById dado getDeckJSON
+      putStrLn ("Você comprou a carta: " ++ (show (nomeC cartaComprada)) ++ "\n" ++ (show (descricaoC cartaComprada))) 
+      putStrLn ("Pressione ENTER para continuar!")
+      esperar <- getLine
+      if (tipo cartaComprada == "positiva") 
+        then do
+          avancaCasa (idCasa casa + 1) tabuleiro requisitos
+          return True
+      else do
+        voltaCasa (idCasa casa - 1) tabuleiro requisitos
+        return True
     else do
-      executaQuiz quizCasa
-
--- requisitos <- Json.getRequisitos (x)
--- disciplinasCursada <- Json.historico . getDisciplinasCursadas ()
--- Comparação entre array de disciplinas com array de requisitos, if False then return false
+      let quizCasa = quiz casa
+      if null quizCasa
+        then do
+          putStrLn "Não tem quiz"
+          return True
+        else do
+          executaQuiz quizCasa
 
 executaQuiz :: [Quiz] -> IO Bool
 executaQuiz quiz = do
@@ -228,31 +235,6 @@ limpaTela = do
   clearScreen
   setCursorPosition 0 0
 
--- executaCasaComplementar :: String -> Int -> IO ()
--- executaCasaComplementar tipoCarta idPlayer = do
---   if (idPlayer == 1) then do
---     if (tipoCarta == "positiva") then do
---       executaAcaoPositiva "humano"
---     else do
---       executaAcaoNegativa "humano"
---   else do
---     if (tipoCarta == "positiva") then do
---       executaAcaoPositiva "bot"
---     else do
---       executaAcaoNegativa "bot"
-
--- executaAcaoPositiva ::  IO ()
--- executaAcaoNegativa
---   |
---   |
--- -- Vários casamentos de padrão com o resultado do numero aleatorio.
-
--- executaAcaoNegativa :: IO ()
--- executaAcaoNegativa
---   |
---   |
--- -- Vários casamentos de padrão com o resultado do numero aleatorio.
-
 voltaCasa :: Int -> [String] -> [String] -> IO ()
 voltaCasa x tabuleiro requisitos = do
   let novoTabuleiroErro = modificarTabuleiro tabuleiro "X" (show x)
@@ -266,18 +248,21 @@ voltaCasa x tabuleiro requisitos = do
   let novoTabuleiro = modificarTabuleiro novoTabuleiroErro "X" (show (x + dado))
   singlePlayer (dado + x) novoTabuleiro requisitos
 
+avancaCasa :: Int -> [String] -> [String] -> IO ()
+avancaCasa x tabuleiro requisitos = do
+  let novoTabuleiroErro = modificarTabuleiro tabuleiro "X" (show x)
+  limpaTela
+  exibirTabuleiro novoTabuleiroErro
+  putStrLn "Você avançou uma casa!\nPressione ENTER para jogar o dado novamente."
+  esperar <- getLine
+  dado <- rodaDado
+  putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
+  esperar <- getLine
+  let novoTabuleiro = modificarTabuleiro novoTabuleiroErro "X" (show (x + dado))
+  singlePlayer (dado + x) novoTabuleiro requisitos
+
 rodaDado :: IO Int
 rodaDado = randomRIO (1, 4)
 
--- -- Adicionar na BD um array com as notas adquiridas, aí usamos ela para calcular a média do CRA
-
--- -- Calcula a média dos CRAs (NAO SEI SE ESTA ATUALIZADO)
--- calculaCRA :: [Double] -> Double
--- calculaCRA [] = 0
--- calculaCRA xs = sum xs / length xs
-
--- acertouCRA :: Double
--- acertouCRA = 7.0 + (randomRIO (1, 6) * 0.5)
-
--- errouCRA :: Double
--- errouCRA = 5.0 - (randomRIO (1, 20) * 0.25)
+rodaDadoCarta :: IO Int
+rodaDadoCarta = randomRIO (1, 13)

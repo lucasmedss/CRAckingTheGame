@@ -21,14 +21,27 @@ getDeckJSON = do
   let decodedFile = decode file :: Maybe [Carta]
   fromMaybe [] decodedFile
 
-compraCarta :: [Carta] -> IO ()
-compraCarta deck = do
+getCartaById :: Int -> [Carta] -> Carta
+getCartaById _ [] = Carta "" (-1) "" ""
+getCartaById idS (x : xs)
+  | idCarta x == idS = x
+  | otherwise = getCartaById idS xs
+
+moveCarta :: IO ()
+moveCarta = do
+  let deck = getDeckJSON
   let carta = head deck
   let novoDeck = tail deck ++ [carta]
   sobrescreverDeck novoDeck
 
-embaralharDeck :: [Carta] -> IO ()
-embaralharDeck deck = do
+compraCarta :: Carta
+compraCarta = do
+  let deck = getDeckJSON
+  head deck
+
+embaralharDeck :: IO ()
+embaralharDeck = do
+  let deck = getDeckJSON
   let deckEmbaralhadoJSON = shuffle' deck (length deck) (mkStdGen 42)
   sobrescreverDeck deckEmbaralhadoJSON
 

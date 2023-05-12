@@ -6,7 +6,8 @@ import GHC.Generics (Generic)
 
 data Carta = Carta
   { tipo :: String,
-    nome :: String,
-    descricao :: String
+    idCarta :: Int,
+    nomeC :: String,
+    descricaoC :: String
   }
   deriving (Show, Generic)
