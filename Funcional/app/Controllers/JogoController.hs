@@ -47,55 +47,35 @@ multiplayer 0 0 1 tabuleiro requisitos = do
       exibirTabuleiro tabuleiroAtualizado
       multiplayer (dado - 1) 0 2 tabuleiroAtualizado requisitos
 multiplayer x y 1 tabuleiro requisitos = do
-  if y >= 33
+  limpaTela
+  let casa = getCasaByID x getCasasJSON
+  let requisitosCasa = Models.Casa.requisitos casa
+  let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
+  if todasAsDisciplinasCursadas
     then do
-      singlePlayer x tabuleiro requisitos
-    else do
-      if x >= 33
+      resultado <- interacao tabuleiro casa requisitos
+      if resultado
         then do
-          let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
-          limpaTela
-          exibirTabuleiro novoTabuleiro
-          putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
+          putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
+          -- acertouCRA
           esperar <- getLine
-          return ()
-        else do
           limpaTela
-          let casa = getCasaByID x getCasasJSON
-          let requisitosCasa = Models.Casa.requisitos casa
-          let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
-          if todasAsDisciplinasCursadas
-            then do
-              resultado <- interacao tabuleiro casa requisitos
-              if resultado
-                then do
-                  putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
-                  esperar <- getLine
-                  limpaTela
-                  exibirTabuleiro tabuleiro
-                  dado <- rodaDado
-                  putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar.")
-                  esperar <- getLine
-                  limpaTela
-                  let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (dado + x))
-                  exibirTabuleiro novoTabuleiro
-                  putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
-                  esperar <- getLine
-                  multiplayer (x + dado) y 2 novoTabuleiro (requisitos ++ [nome casa] ++ requisitosCasa)
-                else do
-                  limpaTela
-                  putStrLn "Você errou, que pena. Volte uma casa!\nPressione ENTER para continuar."
-                  let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
-                  exibirTabuleiro novoTabuleiro
-                  esperar <- getLine
-                  multiplayer (x - 1) y 2 novoTabuleiro requisitos
-            else do
-              putStrLn "Você não tem os requisitos para essa casa, vai voltar uma casa!"
-              let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
-              exibirTabuleiro novoTabuleiro
-              esperar <- getLine
-              limpaTela
-              multiplayer (x - 1) y 2 novoTabuleiro requisitos
+          exibirTabuleiro tabuleiro
+          dado <- rodaDado
+          putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar.")
+          esperar <- getLine
+          let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (dado + x))
+          exibirTabuleiro novoTabuleiro
+          putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
+          esperar <- getLine
+          multiplayer (x + dado) y 2 novoTabuleiro (requisitos ++ [nome casa])
+        else do
+          putStrLn "aaaawwww errou, vai voltar uma casa!"
+          voltaCasaMultiplayer (x - 1) y 2 tabuleiro requisitos
+    else do
+      putStrLn "Você não tem os requisitos para essa casa, vai voltar uma casa!"
+
+      voltaCasaMultiplayer (x - 1) y 2 tabuleiro (requisitos ++ requisitosCasa)
 multiplayer x y 2 tabuleiro requisitos = do
   interacaoBot x y 1 tabuleiro requisitos
 
