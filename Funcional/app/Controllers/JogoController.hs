@@ -19,7 +19,6 @@ iniciaJogo 1 = singlePlayer 0 getTabuleiro []
 iniciaJogo 2 = multiplayer 0 0 1 getTabuleiro []
 
 multiplayer :: Int -> Int -> Int -> [String] -> [String] -> IO ()
-multiplayer 33 _ _ _ _ = putStrLn "aeeee acabou o jogo"
 multiplayer 0 0 1 tabuleiro requisitos = do
   limpaTela
   putStrLn "Seja bem-vindo ao CRAcking the Game!\nVamos começar!\n"
@@ -31,6 +30,7 @@ multiplayer 0 0 1 tabuleiro requisitos = do
   esperar <- getLine
   limpaTela
   let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show dado)
+  limpaTela
   exibirTabuleiro novoTabuleiro
   let casa = getCasaByID dado getCasasJSON
   resultado <- interacao novoTabuleiro casa requisitos
@@ -42,38 +42,59 @@ multiplayer 0 0 1 tabuleiro requisitos = do
   else do
     putStrLn "Que pena, você errou! Passou a vez para o bot jogar."
     let tabuleiroAtualizado = modificarTabuleiro tabuleiro "X" (show (dado - 1))
+    limpaTela
     exibirTabuleiro tabuleiroAtualizado
-    voltaCasaMultiplayer (dado - 1) 0 2 tabuleiroAtualizado requisitos
+    multiplayer (dado - 1) 0 2 tabuleiroAtualizado requisitos
 multiplayer x y 1 tabuleiro requisitos = do
-  limpaTela
-  let casa = getCasaByID x getCasasJSON
-  let requisitosCasa = Models.Casa.requisitos casa
-  let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
-  if todasAsDisciplinasCursadas
-    then do
-      resultado <- interacao tabuleiro casa requisitos
-      if resultado
-        then do
-          putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
-          -- acertouCRA
-          esperar <- getLine
-          limpaTela
-          exibirTabuleiro tabuleiro
-          dado <- rodaDado
-          putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar.")
-          esperar <- getLine
-          let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (dado + x))
-          exibirTabuleiro novoTabuleiro
-          putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
-          esperar <- getLine
-          multiplayer (x + dado) y 2 novoTabuleiro (requisitos ++ [nome casa])
-        else do
-          putStrLn "aaaawwww errou, vai voltar uma casa!"
-          voltaCasaMultiplayer (x - 1) y 2 tabuleiro requisitos
-    else do
-      putStrLn "Você não tem os requisitos para essa casa, vai voltar uma casa!"
-
-      voltaCasaMultiplayer (x - 1) y 2 tabuleiro (requisitos ++ requisitosCasa)
+  if y >= 33 then do 
+    singlePlayer x tabuleiro requisitos
+  else do
+    if x >= 33
+      then do
+        let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
+        limpaTela
+        exibirTabuleiro novoTabuleiro
+        putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
+        esperar <- getLine
+        return ()
+      else do
+        limpaTela
+        let casa = getCasaByID x getCasasJSON
+        let requisitosCasa = Models.Casa.requisitos casa
+        let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
+        if todasAsDisciplinasCursadas
+          then do
+            resultado <- interacao tabuleiro casa requisitos
+            if resultado
+              then do
+                putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
+                -- acertouCRA
+                esperar <- getLine
+                limpaTela
+                exibirTabuleiro tabuleiro
+                dado <- rodaDado
+                putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar.")
+                esperar <- getLine
+                limpaTela
+                let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (dado + x))
+                exibirTabuleiro novoTabuleiro
+                putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
+                esperar <- getLine
+                multiplayer (x + dado) y 2 novoTabuleiro (requisitos ++ [nome casa] ++ requisitosCasa)
+              else do
+                limpaTela
+                putStrLn "Você errou, que pena. Volte uma casa!\nPressione ENTER para continuar."
+                let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
+                exibirTabuleiro novoTabuleiro
+                esperar <- getLine
+                multiplayer (x - 1) y 2 novoTabuleiro requisitos
+          else do
+            putStrLn "Você não tem os requisitos para essa casa, vai voltar uma casa!"
+            let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
+            exibirTabuleiro novoTabuleiro
+            esperar <- getLine
+            limpaTela
+            multiplayer (x - 1) y 2 novoTabuleiro requisitos
 multiplayer x y 2 tabuleiro requisitos = do
   interacaoBot x y 1 tabuleiro requisitos
 
@@ -88,6 +109,7 @@ interacaoBot x y jogador tabuleiro requisitos = do
       esperar <- getLine
       let novaPosicao = dado + y
       let novoTabuleiro = modificarTabuleiro tabuleiro "Y" (show novaPosicao)
+      limpaTela
       exibirTabuleiro novoTabuleiro
       multiplayer x novaPosicao 1 novoTabuleiro requisitos
     else do
@@ -116,38 +138,10 @@ singlePlayer 0 tabuleiro requisitos = do
   let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show dado)
   singlePlayer dado novoTabuleiro requisitos
 singlePlayer x tabuleiro requisitos = do
-  limpaTela
-  let casa = getCasaByID x getCasasJSON
-  let requisitosCasa = Models.Casa.requisitos casa
-  let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
-  if todasAsDisciplinasCursadas
-    then do
-      resultado <- interacao tabuleiro casa requisitos
-      if resultado
-        then do
-          putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
-          -- acertouCRA
-          esperar <- getLine
-          limpaTela
-          exibirTabuleiro tabuleiro
-          dado <- rodaDado
-          let novaPosicao = x + dado
-          putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
-          esperar <- getLine
-          let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show novaPosicao)
-          exibirTabuleiro novoTabuleiro
-          singlePlayer novaPosicao novoTabuleiro (requisitos ++ [nome casa])
-        else do
-          putStrLn "aaaawwww errou, vai voltar uma casa!"
-          voltaCasa (x - 1) tabuleiro requisitos
-    else do
-      exibirTabuleiro tabuleiro
-      putStrLn "Você não tem as disciplinas necessárias para avançar nessa casa!\nPressione ENTER para voltar uma casa."
-      esperar <- getLine
-      voltaCasa (x - 1) tabuleiro (requisitos ++ requisitosCasa)
   if x >= 33
     then do
       let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
+      limpaTela
       exibirTabuleiro novoTabuleiro
       putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
       esperar <- getLine
@@ -165,26 +159,40 @@ singlePlayer x tabuleiro requisitos = do
               putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
               -- acertouCRA
               esperar <- getLine
+              limpaTela
+              exibirTabuleiro tabuleiro
               dado <- rodaDado
               let novaPosicao = x + dado
               putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para avançar!")
               esperar <- getLine
               let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show novaPosicao)
+              limpaTela
+              exibirTabuleiro novoTabuleiro
               singlePlayer novaPosicao novoTabuleiro (requisitos ++ [nome casa])
             else do
-              putStrLn "aaaawwww errou, vai voltar uma casa!"
-              voltaCasa (x - 1) tabuleiro requisitos
+              let novoTabuleiroErro = modificarTabuleiro tabuleiro "X" (show (x - 1))
+              limpaTela
+              exibirTabuleiro novoTabuleiroErro
+              putStrLn "Infelizmente você errou e voltou uma casa!\nPressione ENTER para continuar."
+              esperar <- getLine
+              limpaTela
+              singlePlayer (x - 1) novoTabuleiroErro requisitos
         else do
-          exibirTabuleiro tabuleiro
+          let novoTabuleiroErro = modificarTabuleiro tabuleiro "X" (show (x - 1))
+          exibirTabuleiro novoTabuleiroErro
           putStrLn "Você não tem as disciplinas necessárias para avançar nessa casa!\nPressione ENTER para voltar uma casa."
           esperar <- getLine
-          voltaCasa (x - 1) tabuleiro (requisitos ++ requisitosCasa)
+          limpaTela
+          singlePlayer (x - 1) novoTabuleiroErro requisitos
+
+      
 
 -- errouCRA
 -- voltaCasa (x - 1)
 
 interacao :: [String] -> Casa -> [String] -> IO Bool
 interacao tabuleiro casa requisitos = do
+  limpaTela
   putStrLn (show (descricao casa))
   exibirTabuleiro tabuleiro
   let quizCasa = quiz casa
