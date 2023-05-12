@@ -6,12 +6,11 @@
 module Controllers.JogoController where
 
 import Controllers.CasaController (getCasaByID, getCasasJSON, getQuizByID)
+import Controllers.DeckController (compraCarta, getCartaById, getDeckJSON, moveCarta)
 import Controllers.TabuleiroController (exibirTabuleiro, getTabuleiro, modificarTabuleiro)
-import Controllers.DeckController (getDeckJSON, compraCarta, moveCarta, getCartaById)
 import Data.Int (Int)
-import Models.Casa
-import Models.Casa (Casa (requisitos))
 import Models.Carta
+import Models.Casa
 import Models.Quiz
 import System.Console.ANSI
 import System.Random
@@ -41,68 +40,68 @@ multiplayer 0 0 1 tabuleiro requisitos = do
       putStrLn "Parabéns por ter acertado! Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
       esperar <- getLine
       multiplayer dado 0 2 novoTabuleiro requisitos
-  else do
-    putStrLn "Que pena, você errou! Passou a vez para o bot jogar."
-    let tabuleiroAtualizado = modificarTabuleiro tabuleiro "X" (show (dado - 1))
-    limpaTela
-    exibirTabuleiro tabuleiroAtualizado
-    multiplayer (dado - 1) 0 2 tabuleiroAtualizado requisitos
+    else do
+      putStrLn "Que pena, você errou! Passou a vez para o bot jogar."
+      let tabuleiroAtualizado = modificarTabuleiro tabuleiro "X" (show (dado - 1))
+      limpaTela
+      exibirTabuleiro tabuleiroAtualizado
+      multiplayer (dado - 1) 0 2 tabuleiroAtualizado requisitos
 multiplayer x y 1 tabuleiro requisitos = do
-  if y >= 33 then do 
-    singlePlayer x tabuleiro requisitos
-  else do
-    if x >= 33
-      then do
-        let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
-        limpaTela
-        exibirTabuleiro novoTabuleiro
-        putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
-        esperar <- getLine
-        return ()
-      else do
-        limpaTela
-        let casa = getCasaByID x getCasasJSON
-        let requisitosCasa = Models.Casa.requisitos casa
-        let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
-        if todasAsDisciplinasCursadas
-          then do
-            resultado <- interacao tabuleiro casa requisitos
-            if resultado
-              then do
-                putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
-                -- acertouCRA
-                esperar <- getLine
-                limpaTela
-                exibirTabuleiro tabuleiro
-                dado <- rodaDado
-                putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar.")
-                esperar <- getLine
-                limpaTela
-                let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (dado + x))
-                exibirTabuleiro novoTabuleiro
-                putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
-                esperar <- getLine
-                multiplayer (x + dado) y 2 novoTabuleiro (requisitos ++ [nome casa] ++ requisitosCasa)
-              else do
-                limpaTela
-                putStrLn "Você errou, que pena. Volte uma casa!\nPressione ENTER para continuar."
-                let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
-                exibirTabuleiro novoTabuleiro
-                esperar <- getLine
-                multiplayer (x - 1) y 2 novoTabuleiro requisitos
-          else do
-            putStrLn "Você não tem os requisitos para essa casa, vai voltar uma casa!"
-            let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
-            exibirTabuleiro novoTabuleiro
-            esperar <- getLine
-            limpaTela
-            multiplayer (x - 1) y 2 novoTabuleiro requisitos
+  if y >= 33
+    then do
+      singlePlayer x tabuleiro requisitos
+    else do
+      if x >= 33
+        then do
+          let novoTabuleiro = modificarTabuleiro tabuleiro "X" "CC"
+          limpaTela
+          exibirTabuleiro novoTabuleiro
+          putStrLn "Você chegou ao final do tabuleiro! Parabéns!\nPressione ENTER para voltar para o menu principal."
+          esperar <- getLine
+          return ()
+        else do
+          limpaTela
+          let casa = getCasaByID x getCasasJSON
+          let requisitosCasa = Models.Casa.requisitos casa
+          let todasAsDisciplinasCursadas = all (`elem` requisitos) requisitosCasa
+          if todasAsDisciplinasCursadas
+            then do
+              resultado <- interacao tabuleiro casa requisitos
+              if resultado
+                then do
+                  putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
+                  esperar <- getLine
+                  limpaTela
+                  exibirTabuleiro tabuleiro
+                  dado <- rodaDado
+                  putStrLn ("Você tirou " ++ show dado ++ " no dado!\nPressione ENTER para continuar.")
+                  esperar <- getLine
+                  limpaTela
+                  let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (dado + x))
+                  exibirTabuleiro novoTabuleiro
+                  putStrLn "Agora é a vez do Bot. Pressione ENTER e aguarde sua vez!"
+                  esperar <- getLine
+                  multiplayer (x + dado) y 2 novoTabuleiro (requisitos ++ [nome casa] ++ requisitosCasa)
+                else do
+                  limpaTela
+                  putStrLn "Você errou, que pena. Volte uma casa!\nPressione ENTER para continuar."
+                  let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
+                  exibirTabuleiro novoTabuleiro
+                  esperar <- getLine
+                  multiplayer (x - 1) y 2 novoTabuleiro requisitos
+            else do
+              putStrLn "Você não tem os requisitos para essa casa, vai voltar uma casa!"
+              let novoTabuleiro = modificarTabuleiro tabuleiro "X" (show (x - 1))
+              exibirTabuleiro novoTabuleiro
+              esperar <- getLine
+              limpaTela
+              multiplayer (x - 1) y 2 novoTabuleiro requisitos
 multiplayer x y 2 tabuleiro requisitos = do
   interacaoBot x y 1 tabuleiro requisitos
 
 interacaoBot :: Int -> Int -> Int -> [String] -> [String] -> IO ()
 interacaoBot x y jogador tabuleiro requisitos = do
-  let randomNumber = 0 
+  let randomNumber = 0
   if randomNumber == 0
     then do
       dado <- rodaDado
@@ -157,7 +156,6 @@ singlePlayer x tabuleiro requisitos = do
           if resultado
             then do
               putStrLn "Parabéns por ter obtido sucesso!\nPressione ENTER para rolar o dado."
-              -- acertouCRA
               esperar <- getLine
               limpaTela
               exibirTabuleiro tabuleiro
@@ -195,16 +193,16 @@ interacao tabuleiro casa requisitos = do
     then do
       dado <- rodaDadoCarta
       let cartaComprada = getCartaById dado getDeckJSON
-      putStrLn ("Você comprou a carta: " ++ (show (nomeC cartaComprada)) ++ "\n" ++ (show (descricaoC cartaComprada))) 
+      putStrLn ("Você comprou a carta: " ++ (show (nomeC cartaComprada)) ++ "\n" ++ (show (descricaoC cartaComprada)))
       putStrLn ("Pressione ENTER para continuar!")
       esperar <- getLine
-      if (tipo cartaComprada == "positiva") 
+      if (tipo cartaComprada == "positiva")
         then do
           avancaCasa (idCasa casa + 1) tabuleiro requisitos
           return True
-      else do
-        voltaCasa (idCasa casa - 1) tabuleiro requisitos
-        return True
+        else do
+          voltaCasa (idCasa casa - 1) tabuleiro requisitos
+          return True
     else do
       let quizCasa = quiz casa
       if null quizCasa
@@ -224,11 +222,16 @@ executaQuiz quiz = do
   putStrLn (show (c quizSelecionado))
   putStrLn (show (d quizSelecionado))
   input <- getLine
-  if input == resposta quizSelecionado
+  if input /= "a" && input /= "b" && input /= "c" && input /= "d"
     then do
-      return True
+      putStrLn "Resposta inválida, tente novamente!"
+      executaQuiz quiz
     else do
-      return False
+      if input == resposta quizSelecionado
+        then do
+          return True
+        else do
+          return False
 
 limpaTela :: IO ()
 limpaTela = do
