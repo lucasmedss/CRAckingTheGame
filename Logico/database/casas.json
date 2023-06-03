@@ -1,0 +1,906 @@
+[
+    {
+        "idCasa": 1,
+        "nome": "P1/LP1",
+        "descricao": "Seja bem-vindo a disciplina de Programacao 1 e Laboratorio de Programacao 1. Prepare-se que essas cadeiras sao responsaveis pelo inicio da programacao do curso.",
+        "requisitos": [],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Qual linguagem de programacao e escolhida para essa disciplina?",
+                "a": "a) Java",
+                "b": "b) Python",
+                "c": "c) C++",
+                "d": "d) Lua",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual e a funcao utilizada para imprimir algo na tela em Python?",
+                "a": "a) print()",
+                "b": "b) input()",
+                "c": "c) scan()",
+                "d": "d) read()",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual e a sintaxe correta para declarar uma variavel em Python?",
+                "a": "a) variable_name = value",
+                "b": "b) value = variable_name",
+                "c": "c) variable_name : value",
+                "d": "d) value : variable_name",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 2,
+        "nome": "FMCC1",
+        "descricao": "Seja bem-vindo a disciplina de Fundamentos de Matematica Para Ciencia da Computacao I e uma disciplina voltada para a consolidacao de assuntos matematicos basicos para a continuidade do curso.",
+        "requisitos": [],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Qual e o volume de uma esfera de raio 3 cm?",
+                "a": "a) 9? cm^2",
+                "b": "b) 12? cm^2",
+                "c": "c) 27? cm^2",
+                "d": "d) 36? cm^2",
+                "resposta": "d"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual e a probabilidade de se jogar um dado e obter um numero par?",
+                "a": "a) 1/6",
+                "b": "b) 2/6",
+                "c": "c) 3/6",
+                "d": "d) 4/6",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual e a definicao de uma funcao injetora?",
+                "a": "a) Uma funcao que mapeia elementos do dominio para elementos do contradominio.",
+                "b": "b) Uma funcao que mapeia cada elemento do dominio para um unico elemento do contradominio.",
+                "c": "c) Uma funcao que mapeia cada elemento do contradominio para um unico elemento do dominio.",
+                "d": "d) Uma funcao que mapeia um subconjunto do dominio para um subconjunto do contradominio.",
+                "resposta": "b"
+            }
+        ]
+    },
+    {
+        "idCasa": 3,
+        "nome": "IC",
+        "descricao": "Seja bem-vindo a disciplina de Introducao a Computacao, uma disciplina voltada para o aprendizado de fundamentos e historico de computacao no mundo e no curso da UFCG.",
+        "requisitos": [],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Qual e o componente principal responsavel pelo processamento de dados em um computador?",
+                "a": "a) Disco rigido",
+                "b": "b) Placa-mae",
+                "c": "c) Processador",
+                "d": "d) Memoria RAM",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual foi o primeiro computador eletronico de grande escala?",
+                "a": "a) ENIAC",
+                "b": "b) UNIVAC",
+                "c": "c) IBM PC",
+                "d": "d) Apple II",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Quem e considerado o pai da computacao?",
+                "a": "a) Charles Babbage",
+                "b": "b) Alan Turing",
+                "c": "c) Steve Jobs",
+                "d": "d) Bill Gates",
+                "resposta": "b"
+            }
+        ]
+    },
+    {
+        "idCasa": 4,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 5,
+        "nome": "FMCC2",
+        "descricao": "Seja bem-vindo a disciplina de Fundamentos de Matematica para Ciencia da Computacao, uma disciplina voltada para a aprendizagem de conceitos de matematica discreta, provas matematicas e logica computacional.",
+        "requisitos": [
+            "FMCC1"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e uma prova matematica?",
+                "a": "a) Uma demonstracao logica que mostra que uma afirmacao e verdadeira",
+                "b": "b) Uma lista de equacoes matematicas que resolvem um problema",
+                "c": "c) Uma explicacao qualitativa de um conceito matematico",
+                "d": "d) Uma conjectura que ainda nao foi comprovada",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual e o objetivo de uma prova matematica?",
+                "a": "a) Demonstrar que uma afirmacao e verdadeira",
+                "b": "b) Resolver um problema matematico",
+                "c": "c) Apresentar uma solucao possivel para um problema matematico",
+                "d": "d) Criar uma nova teoria matematica",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e uma prova por contradicao?",
+                "a": "a) Uma prova que assume a negacao da afirmacao a ser demonstrada e chega a uma contradicao",
+                "b": "b) Uma prova que usa exemplos para mostrar que uma afirmacao e verdadeira",
+                "c": "c) Uma prova que usa a inducao matematica para demonstrar uma afirmacao",
+                "d": "d) Uma prova que usa equacoes matematicas para resolver um problema",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 6,
+        "nome": "P2/LP2",
+        "descricao": "Seja bem-vindo a disciplina de Programacao 2 e Laboratorio de Programacao 2, nessas disciplinas e voltada para o aprendizado de Programacao Orientada a Objetos e modularizacao de sistemas.",
+        "requisitos": [
+            "P1/LP1"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e heranca na programacao orientada a objetos?",
+                "a": "a) Um recurso que permite que um objeto seja criado a partir de um modelo pre-existente",
+                "b": "b) Um recurso que permite que um objeto seja copiado para outro objeto",
+                "c": "c) Um recurso que permite que um objeto seja excluido de um programa",
+                "d": "d) Um recurso que permite que um objeto seja modificado por outro objeto",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e um metodo na programacao orientada a objetos?",
+                "a": "a) Uma variavel que armazena um valor especifico.",
+                "b": "b) Uma funcao que e associada a um objeto e pode ser chamada para executar uma acao especifica.",
+                "c": "c) Uma estrutura de dados que contem varios valores relacionados.",
+                "d": "d) Um operador que realiza uma operacao especifica em um objeto.",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e polimorfismo na programacao orientada a objetos?",
+                "a": "a) Um recurso que permite que um objeto seja criado a partir de um modelo pre-existente",
+                "b": "b) Um recurso que permite que um objeto seja copiado para outro objeto",
+                "c": "c) Um recurso que permite que um objeto seja excluido de um programa",
+                "d": "d) Um recurso que permite que objetos de diferentes classes respondam ao mesmo metodo de maneiras diferentes",
+                "resposta": "d"
+            }
+        ]
+    },
+    {
+        "idCasa": 7,
+        "nome": "Calculo 1",
+        "descricao": "Seja bem-vindo a disciplina de Calculo 1,Uma disciplina voltada para o aprendizado de calculos numericos.",
+        "requisitos": [
+            "FMCC1"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Qual e a derivada da funcao f(x) = 3x^2 + 2x - 1?",
+                "a": "a) f'(x) = 6x + 2",
+                "b": "b) f'(x) = 6x - 2",
+                "c": "C) f'(x) = 2x^2 + 2",
+                "d": "d) f'(x) = 6x^2 + 2x",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual e o limite da funcao g(x) = (x^2 - 4) / (x - 2) quando x se aproxima de 2?",
+                "a": "a) g(2) = -2",
+                "b": "b) g(2) = 0",
+                "c": "c) g(2) = 2",
+                "d": "d) O limite nao existe",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual e a integral definida da funcao h(x) = 3x^2 - 4x + 1 no intervalo de 0 a 2?",
+                "a": "a) ?[0,2] 3x^2 dx = 18",
+                "b": "b) ?[0,2] 3x^2 - 4x dx = 12",
+                "c": "c) ?[0,2] 3x^2 - 4x + 1 dx = 13",
+                "d": "d) ?[0,2] 3x - 4 dx = -1",
+                "resposta": "c"
+            }
+        ]
+    },
+    {
+        "idCasa": 8,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 9,
+        "nome": "EDA/LEDA",
+        "descricao": "Seja bem-vindo a disciplina de Estrutura de Dados e Laboratorio de Estrutura de Dados, voltada para o aprendizado de estruturas de dados e otimizacao de algoritmos de programacao.",
+        "requisitos": [
+            "P1/LP1",
+            "P2/LP2"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que sao Estruturas de Dados?",
+                "a": "a) Uma maneira de armazenar dados em um arquivo de computador",
+                "b": "b) Uma colecao de dados organizados de forma que possam ser usados eficientemente",
+                "c": "c) Um tipo de linguagem de programacao",
+                "d": "d) Um metodo para conectar dispositivos de hardware",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e uma Pilha?",
+                "a": "a) Uma estrutura de dados que armazena elementos em ordem aleatoria",
+                "b": "b) Uma estrutura de dados que armazena elementos em ordem inversa ao seu momento de insercao",
+                "c": "c) Uma estrutura de dados que armazena elementos em ordem crescente",
+                "d": "d) Uma estrutura de dados que armazena elementos em ordem decrescente",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e uma Fila?",
+                "a": "a) Uma estrutura de dados que armazena elementos em ordem aleatoria",
+                "b": "b) Uma estrutura de dados que armazena elementos em ordem inversa ao seu momento de insercao",
+                "c": "c) Uma estrutura de dados que armazena elementos em ordem crescente",
+                "d": "d) Uma estrutura de dados que armazena elementos em ordem de chegada",
+                "resposta": "d"
+            }
+        ]
+    },
+    {
+        "idCasa": 10,
+        "nome": "Teoria dos Grafos",
+        "descricao": "Seja bem-vindo a disciplina de Teoria dos Grafos, disciplina voltada para a aprendizagem de conceitos matematicos utilizados em computacao. Grafos sao estruturas de dados que representam relacoes entre objetos.",
+        "requisitos": [],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e um grafo completo?",
+                "a": "a) Um grafo que nao possui ciclos",
+                "b": "b) Um grafo onde todos os vertices estao conectados por uma aresta",
+                "c": "c) Um grafo direcionado",
+                "d": "d) Um grafo bipartido",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e um grafo euleriano?",
+                "a": "a) Um grafo que possui um ciclo que passa por todos os vertices exatamente uma vez",
+                "b": "b) Um grafo onde todos os vertices estao conectados por uma aresta",
+                "c": "c) Um grafo sem ciclos",
+                "d": "d) Um grafo planar",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e um grafo bipartido?",
+                "a": "a) Um grafo que nao possui ciclos",
+                "b": "b) Um grafo onde todos os vertices estao conectados por uma aresta",
+                "c": "c) Um grafo com dois conjuntos de vertices, onde todos os vertices em um conjunto estao conectados apenas aos vertices do outro conjunto",
+                "d": "d) Um grafo que pode ser desenhado sem que as arestas se cruzem",
+                "resposta": "c"
+            }
+        ]
+    },
+    {
+        "idCasa": 11,
+        "nome": "Logica para Computacao",
+        "descricao": "Seja bem-vindo a disciplina Logica para Computacao, uma area da ciencia da computacao que estuda o raciocinio logico e sua aplicacao na construcao e analise de algoritmos e programas de computador.",
+        "requisitos": [
+            "FMCC1",
+            "Calculo 1"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Qual das seguintes opcoes representa a logica NAND?",
+                "a": "a) A AND B",
+                "b": "b) A OR B",
+                "c": "c) NOT (A AND B)",
+                "d": "d) NOT (A OR B)",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual das seguintes opcoes representa a logica XOR?",
+                "a": "a) A AND B",
+                "b": "b) A OR B",
+                "c": "c) NOT (A AND B)",
+                "d": "d) A OR (NOT B)",
+                "resposta": "d"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual e o valor logico da proposicao 'p implica q' quando p e falso e q e verdadeiro?",
+                "a": "a) Verdadeiro",
+                "b": "b) Falso",
+                "c": "c) Indeterminado",
+                "d": "d) Nenhum dos anteriores",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 12,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 13,
+        "nome": "Paradigmas de Linguagem de Programacao",
+        "descricao": "Parabens! Voce caiu na casa de PLP, a melhor disciplina do curso. Aqui em PLP a gente estuda os paradigmas das linguagens de programacao a fundo e aprende sobre as varias abordagens que essas linguagens usam.",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 14,
+        "nome": "Psoft",
+        "descricao": "Bem-vindo a PSoft, aqui o novo objetivo e ensinar aos estudantes as tecnicas, ferramentas e processos necessarios para desenvolver software de alta qualidade e com baixo custo.",
+        "requisitos": [
+            "P1/LP1"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Qual e a finalidade da tecnica de refatoracao (refactoring)?",
+                "a": "a) Adicionar novas funcionalidades ao software",
+                "b": "b) Corrigir erros de programacao no software",
+                "c": "c) Melhorar a qualidade interna do software",
+                "d": "d) Testar o desempenho do software",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e um requisito de software?",
+                "a": "a) Uma funcionalidade que o software deve ter",
+                "b": "b) Um documento que descreve o design do software",
+                "c": "c) Um processo de testes para o software",
+                "d": "d) Uma tecnica de refatoracao para o software",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual o significado da sigla TDD em Projeto de Software?",
+                "a": "a) Test-Driven Development",
+                "b": "b) Time-Driven Development",
+                "c": "c) Text-Driven Development",
+                "d": "d) Tool-Driven Development",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 15,
+        "nome": "Banco de Dados",
+        "descricao": "Bem-vindo a disciplina de Banco de Dados. Nesta disciplina, voce aprendera conceitos fundamentais de bancos de dados, modelagem de dados, linguagem SQL e administracao de bancos de dados.",
+        "requisitos": [
+            "EDA/LEDA"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e um banco de dados?",
+                "a": "a) Um conjunto de programas para executar tarefas no computador",
+                "b": "b) Um conjunto de dados organizados e relacionados entre si",
+                "c": "c) Um dispositivo fisico de armazenamento de informacoes",
+                "d": "d) Um sistema operacional para gerenciar recursos de hardware",
+                "resposta": "d"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual dessas linguagens e uma linguagem de banco de dados?",
+                "a": "a) Java",
+                "b": "b) Python",
+                "c": "c) SQL",
+                "d": "d) C++",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Para que serve um banco de dados?",
+                "a": "a) Para criar softwares",
+                "b": "b) Para armazenar e gerenciar dados",
+                "c": "c) Para controlar o hardware do computador",
+                "d": "d) Para criar paginas web",
+                "resposta": "b"
+            }
+        ]
+    },
+    {
+        "idCasa": 16,
+        "nome": "OAC/LOAC",
+        "descricao": "Bem-vindo a disciplina de Organizacao e Arquitetura de Computadores/Laboratorio de Organizacao e Arquitetura de Computadores. Nesta disciplina, voce aprendera os principios basicos de organizacao e arquitetura de computadores, desde a construcao de um sistema digital ate a execucao de programas em um processador.",
+        "requisitos": [
+            "IC"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e um processador?",
+                "a": "a) Um dispositivo de entrada de dados em um computador",
+                "b": "b) Um dispositivo de saida de dados em um computador",
+                "c": "c) Um dispositivo de armazenamento de dados em um computador",
+                "d": "d) Um circuito eletronico que executa instrucoes de um programa",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e um bit?",
+                "a": "a) Uma instrucao de um programa de computador",
+                "b": "b) Uma unidade de medida de frequencia de processamento",
+                "c": "c) Uma unidade de medida de armazenamento de dados",
+                "d": "d) Uma unidade de medida de energia eletrica",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e uma memoria RAM?",
+                "a": "a) Uma memoria de armazenamento permanente de dados",
+                "b": "b) Uma memoria de armazenamento temporario de dados",
+                "c": "c) Uma memoria que armazena o sistema operacional do computador",
+                "d": "d) Uma memoria que armazena o software de aplicacao do usuario",
+                "resposta": "b"
+            }
+        ]
+    },
+    {
+        "idCasa": 17,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 18,
+        "nome": "Teoria da Computacao",
+        "descricao": "Bem-vindo a disciplina de Organizacao e Arquitetura de Computadores/Laboratorio de Organizacao e Arquitetura de Computadores. Nesta disciplina, voce aprendera os principios basicos de organizacao e arquitetura de computadores, desde a construcao de um sistema digital ate a execucao de programas em um processador.",
+        "requisitos": [
+            "Paradigmas de Linguagem de Programacao"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e um algoritmo?",
+                "a": "a) Um tipo de linguagem de programacao",
+                "b": "b) Uma sequencia finita de instrucoes para resolver um problema",
+                "c": "c) Um tipo de hardware utilizado em computadores",
+                "d": "d) Um tipo de sistema operacional para servidores",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que sao linguagens formais?",
+                "a": "a) Linguagens que so podem ser entendidas por computadores",
+                "b": "b) Linguagens que so podem ser entendidas por seres humanos",
+                "c": "c) Conjuntos de palavras definidas por regras formais",
+                "d": "d) Conjuntos de imagens definidas por regras formais",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual e o objetivo da teoria da computacao?",
+                "a": "a) Desenvolver softwares de jogos",
+                "b": "b) Criar redes de computadores",
+                "c": "c) Compreender os limites e possibilidades dos processos computacionais",
+                "d": "d) Aprender a utilizar softwares de edicao de texto",
+                "resposta": "c"
+            }
+        ]
+    },
+    {
+        "idCasa": 19,
+        "nome": "Redes de Computadores",
+        "descricao": "Bem-vindo a disciplina de Redes de Computadores. Nesta disciplina, voce aprendera sobre as tecnologias e protocolos utilizados para comunicacao entre computadores, desde redes locais ate a internet.",
+        "requisitos": [
+            "IC"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e um protocolo de rede?",
+                "a": "a) Um software utilizado para desenvolver sites",
+                "b": "b) Um conjunto de regras que define a comunicacao entre dispositivos em uma rede",
+                "c": "c) Um dispositivo utilizado para conectar computadores em rede",
+                "d": "d) Uma linguagem de programacao utilizada para desenvolver aplicativos de rede",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual e o objetivo do endereco IP em uma rede?",
+                "a": "a) Identificar o nome do usuario conectado na rede",
+                "b": "b) Identificar o local geografico do usuario conectado na rede",
+                "c": "c) Identificar o computador ou dispositivo conectado na rede",
+                "d": "d) Identificar a velocidade de conexao do usuario na rede",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e uma rede LAN?",
+                "a": "a) Uma rede de longa distancia",
+                "b": "b) Uma rede sem fio",
+                "c": "c) Uma rede que abrange uma area geografica limitada, como uma casa ou um predio",
+                "d": "d) Uma rede utilizada exclusivamente por empresas de grande porte.",
+                "resposta": "c"
+            }
+        ]
+    },
+    {
+        "idCasa": 20,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 21,
+        "nome": "Analise de Sistemas",
+        "descricao": "Bem-vindo a disciplina de Analise de Sistemas. Nesta disciplina, voce aprendera sobre as tecnicas e ferramentas utilizadas para analisar, projetar e implementar sistemas de software.",
+        "requisitos": [
+            "P1/LP1"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e Analise de Sistemas?",
+                "a": "a) Uma tecnica utilizada para testar sistemas de software",
+                "b": "b) Um processo de identificacao de problemas em sistemas ja implantados",
+                "c": "c) Um conjunto de tecnicas utilizadas para compreender e projetar sistemas de software",
+                "d": "d) Uma tecnica utilizada para desenvolver sistemas de hardware",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Qual e o objetivo da modelagem de sistemas?",
+                "a": "a) Identificar bugs no sistema de software",
+                "b": "b) Projetar a interface do usuario do sistema de software",
+                "c": "c) Descrever visualmente as diferentes partes do sistema de software e como elas se relacionam",
+                "d": "d) Programar o sistema de software",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e um diagrama de casos de uso?",
+                "a": "a) Uma representacao grafica dos requisitos do sistema de software",
+                "b": "b) Uma representacao grafica dos componentes do sistema de software",
+                "c": "c) Uma representacao grafica do codigo-fonte do sistema de software",
+                "d": "d) Uma representacao grafica das funcoes do sistema de hardware",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 22,
+        "nome": "Engenharia de Software",
+        "descricao": "Bem-vindo a disciplina de Engenharia de Software. Nesta disciplina voce aprendera sobre o processo de desenvolvimento de software; gerencia de projeto de software: estimativas de tempo e custo;  analise de riscos; controle de qualidade; Engenharia de Requisitos; Validacao e Verificacao; Evolucao de Software; e Topicos avancados.",
+        "requisitos": [
+            "P1/LP1"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e engenharia de software?",
+                "a": "a) A disciplina que estuda a criacao de jogos eletronicos",
+                "b": "b) A disciplina que estuda o desenvolvimento de sistemas de software",
+                "c": "c) A disciplina que estuda a construcao de pontes e estradas",
+                "d": "d) A disciplina que estuda a criacao de roupas e acessorios",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "Quais sao as principais atividades envolvidas no processo de desenvolvimento de software?",
+                "a": "a) Analise de requisitos, projeto, codificacao, teste e manutencao",
+                "b": "b) Analise de requisitos, projeto, construcao e teste",
+                "c": "c) Analise de requisitos, projeto, codificacao e manutencao",
+                "d": "d) Analise de requisitos, projeto e codificacao",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual e a diferenca entre verificacao e validacao em engenharia de software?",
+                "a": "a) Verificacao e o processo de garantir que o software atenda aos requisitos especificados, enquanto validacao e o processo de garantir que o software atenda as necessidades do usuario.",
+                "b": "b) Verificacao e o processo de garantir que o software atenda as necessidades do usuario, enquanto validacao e o processo de garantir que o software atenda aos requisitos especificados.",
+                "c": "c) Nao ha diferenca entre verificacao e validacao.",
+                "d": "d) Verificacao e o processo de garantir que o hardware funcione corretamente, enquanto validacao e o processo de gara",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 23,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 24,
+        "nome": "Sistemas Operacionais",
+        "descricao": "Seja bem-vindo a disciplina de Sistemas Operacionais! Nesta disciplina, voce aprendera sobre os conceitos fundamentais e as principais funcionalidades dos sistemas operacionais. Voce tera a oportunidade de explorar topicos como gerencia de processador, multithreading, comunicacao entre processos, gerencia de memoria, gerencia de entrada/saida, sistemas de arquivos e virtualizacao. Tambem abordaremos topicos avancados em sistemas operacionais. Estamos ansiosos para comecar esta jornada de aprendizado com voce!",
+        "requisitos": [
+            "OAC/LOAC"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e multithreading?",
+                "a": "a) A capacidade de um sistema operacional de executar varios processos ao mesmo tempo",
+                "b": "b) A capacidade de um sistema operacional de executar varias threads ao mesmo tempo",
+                "c": "c) A capacidade de um sistema operacional de executar varias tarefas ao mesmo tempo",
+                "d": "d) A capacidade de um sistema operacional de executar varios usuarios ao mesmo tempo",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e gerencia de memoria?",
+                "a": "a) O processo pelo qual o sistema operacional gerencia a memoria do computador",
+                "b": "b) O processo pelo qual o sistema operacional gerencia o armazenamento do computador",
+                "c": "c) O processo pelo qual o sistema operacional gerencia a CPU do computador",
+                "d": "d) O processo pelo qual o sistema operacional gerencia a rede do computador",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e virtualizacao?",
+                "a": "a) A criacao de uma versao virtual de algo, como um sistema operacional ou um recurso de hardware",
+                "b": "b) A criacao de uma versao virtual de algo, como um software ou um recurso de rede",
+                "c": "c) A criacao de uma versao virtual de algo, como um usuario ou um recurso de seguranca",
+                "d": "d) A criacao de uma versao virtual de algo, como um arquivo ou um recurso de armazenamento",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 25,
+        "nome": "Metodologia Cientifica",
+        "descricao": "Seja bem-vindo a disciplina de Metodologia Cientifica! Nesta disciplina, voce aprendera sobre o metodo cientifico e como aplica-lo na ciencia da computacao. Voce aprendera a realizar pesquisas empiricas, planejar experimentos e analisar dados usando tecnicas estatisticas. Tambem abordaremos tecnicas e ferramentas de medicao de desempenho e validacao de investigacoes empiricas. Alem disso, voce aprendera a planejar estudos de caso e surveys, ler e escrever artigos cientificos e preparar e apresentar trabalhos. Estamos ansiosos para comecar esta jornada com voce!",
+        "requisitos": [],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e o metodo cientifico?",
+                "a": "a) Um conjunto de tecnicas para realizar experimentos",
+                "b": "b) Um processo sistematico para adquirir conhecimento",
+                "c": "c) Um conjunto de regras para escrever artigos cientificos",
+                "d": "d) Um processo para validar modelos",
+                "resposta": "b"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e uma pesquisa empirica?",
+                "a": "a) Uma pesquisa baseada em observacoes e experiencias",
+                "b": "b) Uma pesquisa baseada em teorias e hipoteses",
+                "c": "c) Uma pesquisa baseada em opinioes e crencas",
+                "d": "d) Uma pesquisa baseada em fatos e dados",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e analise de dados?",
+                "a": "a) O processo de coletar dados para uma pesquisa",
+                "b": "b) O processo de organizar dados para uma pesquisa",
+                "c": "c) O processo de interpretar dados para uma pesquisa",
+                "d": "d) O processo de validar dados para uma pesquisa",
+                "resposta": "c"
+            }
+        ]
+    },
+    {
+        "idCasa": 26,
+        "nome": "Programacao Concorrente",
+        "descricao": "Seja bem-vindo a disciplina de Programacao Concorrente! Nesta disciplina, voce aprendera sobre os conceitos basicos de programacao concorrente e como aplica-los para resolver problemas. Voce aprendera sobre exclusao mutua e sincronizacao usando memoria compartilhada. Tambem abordaremos como a concorrencia e tratada em diferentes linguagens de programacao e como resolver problemas classicos de programacao concorrente. Estamos ansiosos para comecar esta jornada com voce!",
+        "requisitos": [
+            "Sistemas Operacionais"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e programacao concorrente?",
+                "a": "a) A capacidade de um sistema operacional de executar varios processos ao mesmo tempo",
+                "b": "b) A capacidade de um sistema operacional de executar varias threads ao mesmo tempo",
+                "c": "c) A capacidade de um programa de executar varias tarefas ao mesmo tempo",
+                "d": "d) A capacidade de um programa de executar varias threads ao mesmo tempo",
+                "resposta": "d"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e exclusao mutua?",
+                "a": "a) Um mecanismo para garantir que apenas um processo acesse um recurso compartilhado por vez",
+                "b": "b) Um mecanismo para garantir que varios processos acessem um recurso compartilhado por vez",
+                "c": "c) Um mecanismo para garantir que apenas uma thread acesse um recurso compartilhado por vez",
+                "d": "d) Um mecanismo para garantir que varios threads acessem um recurso compartilhado por vez",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e sincronizacao usando memoria compartilhada?",
+                "a": "a) Um mecanismo para coordenar a execucao de varios processos que compartilham memoria",
+                "b": "b) Um mecanismo para coordenar a execucao de varios threads que compartilham memoria",
+                "c": "c) Um mecanismo para coordenar a execucao de varios processos que nao compartilham memoria",
+                "d": "d) Um mecanismo para coordenar a execucao de varios threads que nao compartilham memoria",
+                "resposta": "b"
+            }
+        ]
+    },
+    {
+        "idCasa": 27,
+        "nome": "Inteligencia Artificial",
+        "descricao": "Seja bem-vindo a disciplina de Inteligencia Artificial! Nesta disciplina, voce aprendera sobre agentes inteligentes e sistemas multiagentes. Voce aprendera a resolver problemas e desenvolver estrategias de busca. Tambem abordaremos representacao do conhecimento e raciocinio, tratamento de incerteza e aprendizagem. Alem disso, voce aprendera sobre comunicacao, percepcao e acao em sistemas inteligentes. Tambem discutiremos aplicacoes e IA distribuida e como projetar sistemas inteligentes. Estamos ansiosos para comecar esta jornada com voce!",
+        "requisitos": [
+            "Teoria da Computacao"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e um agente inteligente?",
+                "a": "a) Um programa que pode aprender e tomar decisoes por conta propria",
+                "b": "b) Um programa que pode se comunicar com outros programas",
+                "c": "c) Um programa que pode perceber o ambiente e agir de acordo",
+                "d": "d) Todas as alternativas acima",
+                "resposta": "d"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e representacao do conhecimento em IA?",
+                "a": "a) A forma como o conhecimento e armazenado em um sistema inteligente",
+                "b": "b) A forma como o conhecimento e processado em um sistema inteligente",
+                "c": "c) A forma como o conhecimento e adquirido em um sistema inteligente",
+                "d": "d) A forma como o conhecimento e comunicado em um sistema inteligente",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e aprendizagem em IA?",
+                "a": "a) A capacidade de um sistema inteligente de melhorar seu desempenho com base em experiencias passadas",
+                "b": "b) A capacidade de um sistema inteligente de tomar decisoes por conta propria",
+                "c": "c) A capacidade de um sistema inteligente de se comunicar com outros sistemas inteligentes",
+                "d": "d) A capacidade de um sistema inteligente de perceber o ambiente e agir de acordo",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 28,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 29,
+        "nome": "Compiladores",
+        "descricao": "Seja bem-vindo a disciplina de Compiladores! Nesta disciplina, voce aprendera sobre os conceitos fundamentais de tradutores, incluindo compiladores, interpretadores e montadores. Voce aprendera sobre as fases de um compilador, incluindo analise lexica, analise sintatica e analise semantica. Tambem abordaremos o tratamento e recuperacao de erros, geracao e otimizacao de codigo intermediario e codigo objeto, tabela de simbolos e ambientes de run-time e interpretacao. Alem disso, voce aprendera sobre frameworks, linguagens e ferramentas para construcao de compiladores, compiladores JITS e compiladores avancados. Estamos ansiosos para comecar esta jornada com voce!",
+        "requisitos": [
+            "Paradigmas de Linguagem de Programacao"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e um compilador?",
+                "a": "a) Um programa que traduz codigo fonte em codigo objeto",
+                "b": "b) Um programa que traduz codigo objeto em codigo fonte",
+                "c": "c) Um programa que traduz codigo fonte em linguagem de maquina",
+                "d": "d) Um programa que traduz linguagem de maquina em codigo fonte",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que e analise lexica?",
+                "a": "a) O processo de verificar a sintaxe do codigo fonte",
+                "b": "b) O processo de verificar a semantica do codigo fonte",
+                "c": "c) O processo de dividir o codigo fonte em tokens",
+                "d": "d) O processo de gerar codigo intermediario a partir do codigo fonte",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e analise semantica?",
+                "a": "a) O processo de verificar a sintaxe do codigo fonte",
+                "b": "b) O processo de verificar a semantica do codigo fonte",
+                "c": "c) O processo de dividir o codigo fonte em tokens",
+                "d": "d) O processo de gerar codigo intermediario a partir do codigo fonte",
+                "resposta": "b"
+            }
+        ]
+    },
+    {
+        "idCasa": 30,
+        "nome": "Analise e Tecnicas de Algoritmos",
+        "descricao": "Seja bem-vindo a disciplina de Analise e Tecnicas de Algoritmos! Nesta disciplina, voce aprendera sobre a analise da complexidade de algoritmos e as classes de problemas P e NP. Voce tambem aprendera sobre algoritmos polinomiais deterministicos e nao-deterministicos e reducao entre algoritmos NP-completos. Alem disso, voce aprendera sobre tecnicas de algoritmos como forca bruta, metodo guloso, divisao e conquista, backtracking e programacao dinamica. Tambem abordaremos algoritmos em grafos e algoritmos especiais. Estamos ansiosos para comecar esta jornada com voce!",
+        "requisitos": [
+            "EDA/LEDA"
+        ],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "O que e analise da complexidade de algoritmos?",
+                "a": "a) O processo de verificar a sintaxe do codigo fonte",
+                "b": "b) O processo de verificar a semantica do codigo fonte",
+                "c": "c) O processo de medir o desempenho de um algoritmo em termos de tempo e espaco",
+                "d": "d) O processo de otimizar o desempenho de um algoritmo",
+                "resposta": "c"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que sao classes de problemas P e NP?",
+                "a": "a) Classes de problemas que podem ser resolvidos por algoritmos polinomiais deterministicos e nao-deterministicos, respectivamente",
+                "b": "b) Classes de problemas que podem ser resolvidos por algoritmos exponenciais deterministicos e nao-deterministicos, respectivamente",
+                "c": "c) Classes de problemas que podem ser resolvidos por algoritmos lineares deterministicos e nao-deterministicos, respectivamente",
+                "d": "d) Classes de problemas que podem ser resolvividos por algoritmos logaritmicos deterministicos e nao-deterministicos, respectivamente",
+                "resposta": "a"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "O que e programacao dinamica?",
+                "a": "a) Uma tecnica de algoritmo que resolve um problema dividindo-o em subproblemas menores e armazenando as solucoes desses subproblemas para evitar recalcula-los",
+                "b": "b) Uma tecnica de algoritmo que resolve um problema testando todas as possiveis solucoes ate encontrar a melhor",
+                "c": "c) Uma tecnica de algoritmo que resolve um problema escolhendo sempre a melhor opcao local em cada etapa",
+                "d": "d) Uma tecnica de algoritmo que resolve um problema dividindo-o em subproblemas menores e resolvendo cada subproblema independentemente",
+                "resposta": "a"
+            }
+        ]
+    },
+    {
+        "idCasa": 31,
+        "nome": "Casa Complementar",
+        "descricao": "Seja bem-vindo a Casa Complementar, puxe uma carta do deck e veja o que acontece!",
+        "requisitos": [],
+        "quiz": []
+    },
+    {
+        "idCasa": 32,
+        "nome": "PTCC/TCC",
+        "descricao": "Seja bem-vindo as disciplinas de Trabalho de Conclusao de Curso (TCC) e Projeto de Trabalho de Conclusao de Curso (PTCC)! Essas disciplinas foram projetadas para ajuda-lo a desenvolver suas habilidades em leitura e escrita de relatorios cientificos, preparacao e apresentacao de trabalhos e planejamento e execucao de projetos em ciencia da computacao. Ao longo do curso, voce tera a oportunidade de trabalhar em um projeto e produzir uma monografia sobre seu trabalho. Estamos ansiosos para apoia-lo enquanto voce desenvolve suas habilidades e conhecimentos nessas areas.",
+        "requisitos": [],
+        "quiz": [
+            {
+                "idQuiz": 1,
+                "pergunta": "Quais habilidades voce desenvolvera nas disciplinas de TCC e PTCC?",
+                "a": "a) Leitura e escrita de relatorios cientificos",
+                "b": "b) Preparacao e apresentacao de trabalhos",
+                "c": "c) Planejamento e execucao de projetos em ciencia da computacao",
+                "d": "d) Todas as alternativas acima",
+                "resposta": "d"
+            },
+            {
+                "idQuiz": 2,
+                "pergunta": "O que voce produzira durante as disciplinas de TCC e PTCC?",
+                "a": "a) Uma monografia sobre seu projeto",
+                "b": "b) Um relatorio cientifico",
+                "c": "c) Uma apresentacao",
+                "d": "d) Todas as alternativas acima",
+                "resposta": "d"
+            },
+            {
+                "idQuiz": 3,
+                "pergunta": "Qual e o foco principal das disciplinas de TCC e PTCC?",
+                "a": "a) Desenvolver habilidades em leitura e escrita de relatorios cientificos",
+                "b": "b) Preparacao e apresentacao de trabalhos",
+                "c": "c) Planejamento e execucao de projetos em ciencia da computacao",
+                "d": "d) Todas as alternativas acima",
+                "resposta": "d"
+            }
+        ]
+    }
+]
