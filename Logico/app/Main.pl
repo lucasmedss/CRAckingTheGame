@@ -50,3 +50,5 @@ processar_opcao(_) :-
   write("Opção inválida\n"),
   sleep(1),
   menu().
+
+limpar_tela :- write('\e[H\e[2J').
