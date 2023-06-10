@@ -3,7 +3,7 @@ main :- menu(), halt.
 menu() :-
     limpar_tela,
     write("Seja bem-vindo ao CRAcking the Game!\n"),
-    open_file('./database/menu.txt', read, Stream),
+    open_file('../database/menu.txt', read, Stream),
     ler_conteudo(Stream),
     close_file(Stream),
     opcao_valida.
