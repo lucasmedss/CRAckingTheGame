@@ -17,28 +17,21 @@ carta(negativa, IdCarta, Nome, Descricao) :-
 carta(negativa, IdCarta, Nome, Descricao, _) :-
     json_read_file('./database/cartas.json', Cartas),
     member(carta(negativa, IdCarta, Nome, Descricao), Cartas).
-# :- dynamic carta/4.
 
-# % Fatos
-# carta(carta{tipo: Tipo, idCarta: Id, nomeC: Nome, descricaoC: Descricao}) :-
-#     atom(Tipo),
-#     integer(Id),
-#     atom(Nome),
-#     atom(Descricao).
+getDescricaoCarta(positiva, IdCarta, Descricao) :-
+    carta(positiva, IdCarta, _, Descricao, _).
 
-# % Exemplo de fatos
-# carta(carta{tipo: "Tipo1", idCarta: 1, nomeC: "Nome1", descricaoC: "Descrição1"}).
-# carta(carta{tipo: "Tipo2", idCarta: 2, nomeC: "Nome2", descricaoC: "Descrição2"}).
-# carta(carta{tipo: "Tipo3", idCarta: 3, nomeC: "Nome3", descricaoC: "Descrição3"}).
+getDescricaoCarta(negativa, IdCarta, Descricao) :-
+    carta(negativa, IdCarta, _, Descricao, _).
 
-# % Recuperar o tipo de uma carta específica
-# getTipoCarta(CartaId, TipoCarta) :-
-#     carta(carta{ tipo: TipoCarta, idCarta: CartaId, _, _ }).
+getIdCarta(positiva, IdCarta) :-
+    carta(positiva, IdCarta, _, _, _).
 
-# % Recuperar o nome de uma carta específica
-# getNomeCarta(CartaId, NomeCarta) :-
-#     carta(carta{ tipo: _, idCarta: CartaId, nomeC: NomeCarta, _ }).
+getIdCarta(negativa, IdCarta) :-
+    carta(negativa, IdCarta, _, _, _).
 
-# % Recuperar a descrição de uma carta específica
-# getDescricaoCarta(CartaId, DescricaoCarta) :-
-#     carta(carta{ tipo: _, idCarta: CartaId, _, descricaoC: DescricaoCarta }).
+getNomeCarta(positiva, IdCarta, Nome) :-
+    carta(positiva, IdCarta, Nome, _, _).
+
+getNomeCarta(negativa, IdCarta, Nome) :-
+    carta(negativa, IdCarta, Nome, _, _).
