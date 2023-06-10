@@ -34,6 +34,7 @@ opcao_valida :-
 processar_opcao(1) :-
     limpar_tela,
     write("Jogar\n"),
+    roda_jogo(1),
     menu().
 
 processar_opcao(2) :-
