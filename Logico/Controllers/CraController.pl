@@ -60,7 +60,33 @@ aumentaCraPorCarta(Player) :-
     ),
     assertz(notas(NotasAtualizadas)),
     sobrescreverNotas(NotasAtualizadas).
-
 diminuiCraPorCarta(Player) :-
-    retract(notas(Notas)),
-    getCraByJ
+    notas(Notas),
+    getCraByJogador(Player, Notas, Cra),
+    getNumeroDisciplinasByJogador(Player, Notas, NumeroDisciplinas),
+    random_between(1, 3, Dado),
+    Decrescimo is Dado * 0.2,
+    (Cra - Decrescimo) < 0.0,
+    !,
+    craAtualizado(0.0, Player, NumeroDisciplinas, Notas, NotasAtualizadas),
+    sobrescreverNotas(NotasAtualizadas).
+    
+diminuiCraPorCarta(Player) :-
+    notas(Notas),
+    getCraByJogador(Player, Notas, Cra),
+    getNumeroDisciplinasByJogador(Player, Notas, NumeroDisciplinas),
+    random_between(1, 3, Dado),
+    Decrescimo is Dado * 0.2,
+    CraAtualizado is Cra - Decrescimo,
+    craAtualizado(CraAtualizado, Player, NumeroDisciplinas, Notas, NotasAtualizadas),
+    sobrescreverNotas(NotasAtualizadas).
+
+craAtualizado(CraAtualizado, Player, NumeroDisciplinas, Notas, NotasAtualizadas) :-
+    removeNotaByJogador(Player, Notas, NotasSemPlayer),
+    NotaAtualizada = nota(Player, CraAtualizado, NumeroDisciplinas),
+    append(NotasSemPlayer, [NotaAtualizada], NotasAtualizadas).
+
+sobrescreverNotas(Notas) :-
+    write_file("./database/Temp.json", Notas),
+    remove_file("./database/notas.json"),
+    rename_file("./database/Temp.json", "./database/notas.json").
