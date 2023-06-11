@@ -2,9 +2,7 @@
     getNomeCasa/2,
     getDescricaoCasa/2,
     getRequisitosCasa/2,
-    getQuizPerguntaCasa/3,
-    getQuizAlternativaCasa/4,
-    getRespostaCasa/3
+    isCasaComplementar/1
     ]).
 
 :- use_module(library(http/json)).
@@ -28,20 +26,10 @@ getRequisitosCasa(IdCasa, Requisitos) :-
     getCasa(IdCasa, Casa),
     get_dict(requisitos, Casa, Requisitos).
 
-getQuizCasa(IdCasa, IdQuiz, Quiz) :-
+isCasaComplementar(IdCasa):-
     getCasa(IdCasa, Casa),
-    get_dict(quiz, Casa, QuizCasa),
-    member(Quiz, QuizCasa),
-    get_dict(idQuiz, Quiz, IdQuiz).
-
-getQuizPerguntaCasa(IdCasa, IdQuiz, Pergunta) :-
-    getQuizCasa(IdCasa, IdQuiz, Quiz),
-    get_dict(pergunta, Quiz, Pergunta).
-
-getQuizAlternativaCasa(IdCasa, IdQuiz, Letra, Alternativa) :-
-    getQuizCasa(IdCasa, IdQuiz, Quiz),
-    get_dict(Letra, Quiz, Alternativa).
-
-getRespostaCasa(IdCasa, IdQuiz, Resposta) :-
-    getQuizCasa(IdCasa, IdQuiz, Quiz),
-    get_dict(resposta, Quiz, Resposta).
+    get_dict(quiz, Casa, Quiz),
+    (   Quiz = [] ->
+        true
+    ;   false
+    ).

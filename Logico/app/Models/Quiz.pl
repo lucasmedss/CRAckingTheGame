@@ -1,30 +1,32 @@
-:- use_module(library(pio)).
-:- use_module(library(json)).
+:- module('Quiz', [
+    getQuizCasa/3,
+    getQuizPerguntaCasa/3,
+    getQuizAlternativaCasa/4,
+    getRespostaCasa/3]).
+
 :- use_module(library(http/json)).
 
-:- dynamic quiz/7.
+getCasa(IdCasa, Casa) :-
+    open('../database/casas.json', read, Stream),
+    json_read_dict(Stream, Casas),
+    close(Stream),
+    member(Casa, Casas),
+    get_dict(idCasa, Casa, IdCasa).
 
-quiz(IdQuiz, Pergunta, A, B, C, D, Resposta) :-
-    quiz(IdQuiz, Pergunta, A, B, C, D, Resposta, _).
+getQuizCasa(IdCasa, IdQuiz, Quiz) :-
+    getCasa(IdCasa, Casa),
+    get_dict(quiz, Casa, QuizCasa),
+    member(Quiz, QuizCasa),
+    get_dict(idQuiz, Quiz, IdQuiz).
 
-quiz(IdQuiz, Pergunta, A, B, C, D, Resposta, _) :-
-    json_read_file('./database/quizzes.json', Quizzes),
-    member(quiz(IdQuiz, Pergunta, A, B, C, D, Resposta), Quizzes).
+getQuizPerguntaCasa(IdCasa, IdQuiz, Pergunta) :-
+    getQuizCasa(IdCasa, IdQuiz, Quiz),
+    get_dict(pergunta, Quiz, Pergunta).
 
-getPerguntaQuiz(IdQuiz, Pergunta) :-
-    quiz(IdQuiz, Pergunta, _, _, _, _, _).
+getQuizAlternativaCasa(IdCasa, IdQuiz, Letra, Alternativa) :-
+    getQuizCasa(IdCasa, IdQuiz, Quiz),
+    get_dict(Letra, Quiz, Alternativa).
 
-getRespostaQuiz(IdQuiz, Resposta) :-
-    quiz(IdQuiz, _, _, _, _, _, Resposta).
-
-getAQuiz(IdQuiz, A) :-
-    quiz(IdQuiz, _, A, _, _, _, _).
-
-getBQuiz(IdQuiz, B) :-
-    quiz(IdQuiz, _, _, B, _, _, _).
-
-getCQuiz(IdQuiz, C) :-
-    quiz(IdQuiz, _, _, _, C, _, _).
-    
-getDQuiz(IdQuiz, D) :-
-    quiz(IdQuiz, _, _, _, _, D, _).
+getRespostaCasa(IdCasa, IdQuiz, Resposta) :-
+    getQuizCasa(IdCasa, IdQuiz, Quiz),
+    get_dict(resposta, Quiz, Resposta).
