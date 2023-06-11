@@ -1,37 +1,26 @@
-:- use_module(library(pio)).
-:- use_module(library(json)).
+:- module('Carta', [
+    getNomeCarta/2,
+    getDescricaoCarta/2,
+    getTipoCarta/2
+    ]).
+
 :- use_module(library(http/json)).
 
-:- dynamic carta/4.
+getCarta(IdCarta, Carta) :-
+    open('../database/deck.json', read, Stream),
+    json_read_dict(Stream, Cartas),
+    close(Stream),
+    member(Carta, Cartas),
+    get_dict(idCarta, Carta, IdCarta).
 
-carta(positiva, IdCarta, Nome, Descricao) :-
-    carta(positiva, IdCarta, Nome, Descricao, _).
+getNomeCarta(IdCarta, Nome) :-
+    getCarta(IdCarta, Carta),
+    get_dict(nome, Carta, Nome).
 
-carta(positiva, IdCarta, Nome, Descricao, _) :-
-    json_read_file('./database/cartas.json', Cartas),
-    member(carta(positiva, IdCarta, Nome, Descricao), Cartas).
+getDescricaoCarta(IdCarta, Descricao) :-
+    getCarta(IdCarta, Carta),
+    get_dict(descricao, Carta, Descricao).
 
-carta(negativa, IdCarta, Nome, Descricao) :-
-    carta(negativa, IdCarta, Nome, Descricao, _).
-
-carta(negativa, IdCarta, Nome, Descricao, _) :-
-    json_read_file('./database/cartas.json', Cartas),
-    member(carta(negativa, IdCarta, Nome, Descricao), Cartas).
-
-getDescricaoCarta(positiva, IdCarta, Descricao) :-
-    carta(positiva, IdCarta, _, Descricao, _).
-
-getDescricaoCarta(negativa, IdCarta, Descricao) :-
-    carta(negativa, IdCarta, _, Descricao, _).
-
-getIdCarta(positiva, IdCarta) :-
-    carta(positiva, IdCarta, _, _, _).
-
-getIdCarta(negativa, IdCarta) :-
-    carta(negativa, IdCarta, _, _, _).
-
-getNomeCarta(positiva, IdCarta, Nome) :-
-    carta(positiva, IdCarta, Nome, _, _).
-
-getNomeCarta(negativa, IdCarta, Nome) :-
-    carta(negativa, IdCarta, Nome, _, _).
+getTipoCarta(IdCarta, Tipo) :-
+    getCarta(IdCarta, Carta),
+    get_dict(tipo, Carta, Tipo).

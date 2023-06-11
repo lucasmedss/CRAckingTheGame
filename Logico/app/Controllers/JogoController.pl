@@ -3,6 +3,7 @@
 :- use_module(library(random)).
 :- use_module('Models/Casa', [getNomeCasa/2, getDescricaoCasa/2, getRequisitosCasa/2, isCasaComplementar/1]).
 :- use_module('Models/Quiz', [getQuizCasa/3, getQuizPerguntaCasa/3, getQuizAlternativaCasa/4, getRespostaCasa/3]).
+:- use_module('Models/Carta', [getNomeCarta/2, getDescricaoCarta/2, getTipoCarta/2]).
 :- use_module('TabuleiroController', [exibirTabuleiro/1, modificarTabuleiro/4]).
 :- use_module('MenuController', [limpar_tela/0]).
 
@@ -26,7 +27,7 @@ roda_jogo(IdCasa, Tabuleiro) :-
     getDescricaoCasa(IdCasa, DescricaoCasa),
     writeln(DescricaoCasa),
     exibirTabuleiro(Tabuleiro),
-    interacao(IdCasa, Resultado),
+    interacao(IdCasa, Resultado, Tabuleiro),
     (Resultado == true ->
         roda_dado(Dado),
         NovoValor is IdCasa + Dado,
@@ -43,22 +44,44 @@ roda_dado(Resultado) :-
 seleciona_quiz(IdQuiz) :-
     random(1, 4, IdQuiz).
 
-interacao(IdCasa, Resultado) :-
-    %isCasaComplementar(IdCasa)
-    %Lógica de casa complementar
-    %(Quiz == "" ->
-    %    Resultado is Interacao).! #Break
-    seleciona_quiz(IdQuiz),
-    printa_casa(IdCasa, IdQuiz),
-    ler_resposta(RespostaUsuario),
-    getRespostaCasa(IdCasa, IdQuiz, RespostaQuiz),
-    (   RespostaUsuario = RespostaQuiz ->
-        writeln('Resposta correta!'),
-        Resultado = true
-    ;   writeln('Resposta incorreta! Você voltará uma casa!'),
+seleciona_acao(Acao) :-
+    %1 eh avancar ou voltar casa, 2 eh coisa de cra diminuir aumentar sla dps ajeitar pra (1, 2)
+    random(1, 2, Acao). 
+
+seleciona_carta(IdCarta) :-
+    random(1, 13, IdCarta).    
+
+interacao(IdCasa, Resultado, Tabuleiro) :-
+    getDescricaoCasa(IdCasa, DescricaoCasa),
+    write(DescricaoCasa),
+    (   IdCasa = 13 ->
+        writeln('Aproveite e siga o jogo!'),
         esperar_enter,
-        Resultado = false
-    ).
+        Resultado = true
+        ;
+        (   isCasaComplementar(IdCasa) ->
+            seleciona_carta(IdCarta),
+            printa_carta(IdCarta),
+            getTipoCarta(IdCarta, TipoCarta),
+            (   TipoCarta = "positiva" ->
+                acaoPositiva(IdCasa, Tabuleiro)
+                ;   
+                acaoNegativa(IdCasa, Tabuleiro)
+            )
+            ;
+            seleciona_quiz(IdQuiz),
+            printa_casa(IdCasa, IdQuiz),
+            ler_resposta(RespostaUsuario),
+            getRespostaCasa(IdCasa, IdQuiz, RespostaQuiz),
+            (   RespostaUsuario = RespostaQuiz ->
+                writeln('Resposta correta!'),
+                Resultado = true
+            ;    writeln('Resposta incorreta! Você voltará uma casa!'),
+                esperar_enter,
+                Resultado = false
+            )
+        )
+    ).    
 
 ler_resposta(Resposta) :-
     get_single_char(Code),
@@ -86,6 +109,34 @@ printa_casa(IdCasa, IdQuiz) :-
     writeln(AlternativaC),
     getQuizAlternativaCasa(IdCasa, IdQuiz, d, AlternativaD),
     writeln(AlternativaD).
+
+printa_carta(IdCarta) :-
+    getNomeCarta(IdCarta, Nome),
+    writeln(Nome),
+    getDescricaoCarta(IdCarta, Descricao),
+    writeln(Descricao).
+
+acaoPositiva(IdCasaAtual, Tabuleiro) :-
+    seleciona_acao(Acao),
+    (   Acao == 1 ->
+        IdCasaNovo is IdCasaAtual + 1,
+        writeln('Você avançará uma casa!'),
+        esperar_enter,
+        modificarTabuleiro(Tabuleiro, "X", IdCasaNovo, NovoTabuleiro),
+        roda_jogo(IdCasaNovo, NovoTabuleiro)
+    % ; acao == 2 etcc etc   
+    ).
+
+acaoNegativa(IdCasaAtual, Tabuleiro) :-
+    seleciona_acao(Acao),
+    (   Acao == 1 ->
+        IdCasaNovo is IdCasaAtual - 1,
+        writeln('Você voltará uma casa!'),
+        esperar_enter,
+        modificarTabuleiro(Tabuleiro, "X", IdCasaNovo, NovoTabuleiro),
+        roda_jogo(IdCasaNovo, NovoTabuleiro)
+    % ; Acao == 2 etcc
+    ).    
 
 esperar_enter :-
     writeln('Pressione ENTER para prosseguir.'),
