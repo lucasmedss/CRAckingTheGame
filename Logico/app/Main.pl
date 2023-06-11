@@ -3,9 +3,7 @@
 :- consult('Controllers/JogoController').
 
 main :-
-    getTabuleiro(Tabuleiro),
-    roda_jogo(1, Tabuleiro),
-    halt.
+    menu().
 
 menu :-
     limpar_tela,
@@ -35,22 +33,25 @@ opcao_valida :-
     write("1 - Jogar\n"),
     write("2 - Jogar contra o Bot\n"),
     write("3 - Sair\n"),
-    read(Opcao),
+    get_single_char(Code),
+    char_code(Char, Code),
+    atom_chars(Opcao, [Char]),
+    writeln(Opcao),
     processar_opcao(Opcao).
 
-processar_opcao(1) :-
+processar_opcao('1') :-
     limpar_tela,
     write("Jogar\n"),
     getTabuleiro(Tabuleiro),
     roda_jogo(1, Tabuleiro),
     menu().
 
-processar_opcao(2) :-
+processar_opcao('2') :-
     limpar_tela,
     write("Jogar contra o Bot\n"),
     menu().
 
-processar_opcao(3) :-
+processar_opcao('3') :-
     limpar_tela,
     write("Obrigado por jogar CRAcking the Game\nAté mais!"), halt.
 
