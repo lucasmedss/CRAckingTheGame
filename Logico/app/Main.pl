@@ -1,6 +1,10 @@
-main :- menu(), halt.
+:- consult('Controllers/TabuleiroController.pl').
 
-menu() :-
+main :-
+    menu(),
+    halt.
+
+menu :-
     limpar_tela,
     write("Seja bem-vindo ao CRAcking the Game!\n"),
     open_file('../database/menu.txt', read, Stream),
@@ -40,7 +44,6 @@ processar_opcao(1) :-
 processar_opcao(2) :-
     limpar_tela,
     write("Jogar contra o Bot\n"),
-    
     menu().
 
 processar_opcao(3) :-
@@ -48,8 +51,14 @@ processar_opcao(3) :-
     write("Obrigado por jogar CRAcking the Game\nAté mais!"), halt.
 
 processar_opcao(_) :-
-  write("Opção inválida\n"),
-  sleep(1),
-  menu().
+    write("Opção inválida\n"),
+    sleep(1),
+    menu().
 
-limpar_tela :- write('\e[H\e[2J').
+limpar_tela :-
+    write('\e[H\e[2J').
+
+esperar_enter :-
+    write('Pressione ENTER para prosseguir.'),
+    get_char(_),
+    nl.

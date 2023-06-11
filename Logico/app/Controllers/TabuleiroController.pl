@@ -1,71 +1,53 @@
-:- module(tabuleiro, [
-    getTabuleiro/1,
-    exibirTabuleiro/1,
-    getLinha/3,
-    getColuna/3,
-    getPosicao/3,
-    modificarTabuleiro/4,
-    replaceChar/4
-]).
-
-:- use_module(library(lists)).
-:- use_module(library(system)).
-
 getTabuleiro(Tabuleiro) :-
-    read_file_to_codes('./database/tabuleiro.txt', TabuleiroCodes),
-    string_codes(TabuleiroString, TabuleiroCodes),
+    read_file_to_string('../database/tabuleiro.txt', TabuleiroString, []),
     split_string(TabuleiroString, "\n", "", Tabuleiro).
 
 exibirTabuleiro(Tabuleiro) :-
-    atomic_list_concat(Tabuleiro, '\n', TabuleiroString),
-    writeln(TabuleiroString).
-
-getLinha([], _, _, -1).
-getLinha([X | XS], Casa, Index, Linha) :-
-    (   sub_string(X, _, _, _, Casa) ->
-        Linha = Index
-    ;   NextIndex is Index + 1,
-        getLinha(XS, Casa, NextIndex, Linha)
-    ).
-
-getColuna(Linha, Casa, 0) :-
-    sub_string(Linha, 0, _, _, Casa).
-getColuna(Linha, Casa, Coluna) :-
-    sub_string(Linha, 1, _, _, Resto),
-    getColuna(Resto, Casa, NextColuna),
-    (   NextColuna \= -1 ->
-        Coluna is NextColuna + 1
-    ;   Coluna = -1
-    ).
-
-getPosicao(Tabuleiro, Casa, (Linha, Coluna)) :-
-    getLinha(Tabuleiro, Casa, 0, Linha),
-    nth0(Linha, Tabuleiro, LinhaTabuleiro),
-    getColuna(LinhaTabuleiro, Casa, Coluna).
+    maplist(writeln, Tabuleiro).
 
 modificarTabuleiro(Tabuleiro, Jogador, Posicao, NovoTabuleiro) :-
-    (   number_string(PosicaoNum, Posicao),
-        PosicaoNum > 33 ->
-        ProximaPosicao = "CC"
-    ;   ProximaPosicao = Posicao
+    (   Posicao > 33 ->
+        ProximaInt = "CC"
+    ;   ProximaInt = Posicao
     ),
-    getPosicao(Tabuleiro, Jogador, Atual),
-    nth0(0, Atual, LinhaAtual),
-    nth0(1, Atual, ColunaAtual),
-    replaceChar(LinhaAtual, ColunaAtual, ' ', LinhaTabuleiro, NovaLinha),
-    replace(Tabuleiro, LinhaAtual, NovaLinha, TabuleiroAtualizado),
-    getPosicao(TabuleiroAtualizado, ProximaPosicao, Proximo),
-    nth0(0, Proximo, LinhaProximo),
-    nth0(1, Proximo, ColunaProximo),
+    format(atom(ProximaPosicao), '~|~`0t~d~2+', [ProximaInt]),
+    getPosicao(Tabuleiro, Jogador, 0, LinhaAtual, ColunaAtual),
+    replace(Tabuleiro, LinhaAtual, ColunaAtual, " ", TabuleiroTemp),
+    getPosicao(Tabuleiro, ProximaPosicao, 0, LinhaProximo, ColunaProximo),
+    ProximaLinha is LinhaProximo - 1,
     (   Jogador = "X" ->
-        PosicaoJogador is ColunaProximo + 1
-    ;   PosicaoJogador = ColunaProximo
+        ProximaColuna is ColunaProximo + 1
+    ;   ProximaColuna is ColunaProximo
     ),
-    replaceChar(LinhaProximo, PosicaoJogador, Jogador, LinhaTabuleiroProximo, NovaLinhaProximo),
-    replace(TabuleiroAtualizado, LinhaProximo, NovaLinhaProximo, NovoTabuleiro).
+    replace(TabuleiroTemp, ProximaLinha, ProximaColuna, Jogador, NovoTabuleiro).
 
-replaceChar(Index, Char, String, NewString) :-
-    sub_string(String, 0, Index, _, Substring1),
-    sub_string(String, _, Index, 0, Substring2),
-    string_concat(Substring1, Char, Temp),
-    string_concat(Temp, Substring2, NewString).
+getPosicao([], _, _, -1, -1).
+getPosicao([X|XS], Casa, Index, Linha, Coluna) :-
+    (   sub_string(X, Coluna, _, _, Casa) ->
+        Linha is Index
+    ;   NewIndex is Index + 1,
+        getPosicao(XS, Casa, NewIndex, Linha, Coluna)
+    ).
+
+replace(Tabuleiro, Linha, Coluna, Caractere, NovoTabuleiro) :-
+    nth0(Linha, Tabuleiro, LinhaTabuleiro),
+    replaceLinha(LinhaTabuleiro, Coluna, Caractere, NovaLinha),
+    slice(Tabuleiro, 0, Linha, ParteAntes),
+    append(ParteAntes, [NovaLinha], TabuleiroTemp),
+    ProximaLinha is Linha + 1,
+    slice(Tabuleiro, ProximaLinha, 18, ParteDepois),
+    append(TabuleiroTemp, ParteDepois, NovoTabuleiro).
+
+replaceLinha(Linha, Posicao, NovoCaractere, NovaLinha) :-
+    sub_string(Linha, 0, Posicao, _, ParteAntes),
+    PosicaoMaisUm is Posicao + 1,
+    sub_string(Linha, PosicaoMaisUm, _, 0, ParteDepois),
+    string_concat(ParteAntes, NovoCaractere, TempLinha),
+    string_concat(TempLinha, ParteDepois, NovaLinha).
+
+slice(Lista, Inicio, Fim, Slice) :-
+    length(Prefixo, Inicio),
+    append(Prefixo, Sufixo, Lista),
+    NewFim is Fim - Inicio,
+    length(Slice, NewFim),
+    append(Slice, _, Sufixo).
