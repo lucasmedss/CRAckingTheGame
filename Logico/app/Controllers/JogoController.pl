@@ -1,5 +1,6 @@
 :- use_module(library(random)).
-:- consult('Models/casa.pl').
+:- consult('Models/Casa').
+:- consult('Models/Quiz').
 :- consult('Controllers/TabuleiroController').
 
 roda_jogo(IdCasa, Tabuleiro) :-
@@ -7,7 +8,7 @@ roda_jogo(IdCasa, Tabuleiro) :-
     write('ACABOU O JOGO'), nl.
 
 roda_jogo(IdCasa, Tabuleiro) :-
-    limpar_tela,
+    %limpar_tela,
     exibirTabuleiro(Tabuleiro),
     interacao(IdCasa, Resultado),
     (Resultado == true ->
@@ -25,25 +26,27 @@ roda_dado(Resultado) :-
     random(0, 5, Resultado).
 
 seleciona_quiz(IdQuiz) :-
-    random(0, 2, Resultado).
+    random(1, 4, IdQuiz).
 
 interacao(IdCasa, Resultado) :-
     getDescricaoCasa(IdCasa, DescricaoCasa),
     write(DescricaoCasa),
-    getQuizCasa(IdCasa, IdQuiz, Quiz),
+    %isCasaComplementar(IdCasa)
     %Lógica de casa complementar
     %(Quiz == "" ->
     %    Resultado is Interacao).! #Break
+    seleciona_quiz(IdQuiz),
+    writeln(IdQuiz),
     getQuizPerguntaCasa(IdCasa, IdQuiz, Pergunta),
     printa_casa(IdCasa, IdQuiz),
     read(RespostaUsuario),
     getRespostaCasa(IdCasa, IdQuiz, Resposta),
-    (RespostaUsuario == Resposta ->
+    atom_string(RespostaQuiz, Resposta),
+    (   RespostaUsuario = RespostaQuiz ->
         write("Resposta correta!"),
-        Resultado is true
-    ;
-        write("Resposta incorreta!"),
-        Resultado is false
+        Resultado = true
+    ;   write("Resposta incorreta!"),
+        Resultado = false
     ).
 
 printa_casa(IdCasa, IdQuiz) :-
@@ -57,4 +60,3 @@ printa_casa(IdCasa, IdQuiz) :-
     writeln(AlternativaC),
     getQuizAlternativaCasa(IdCasa, IdQuiz, d, AlternativaD),
     writeln(AlternativaD).
-    

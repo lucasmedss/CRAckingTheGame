@@ -3,7 +3,8 @@
 :- consult('Controllers/JogoController').
 
 main :-
-    menu(),
+    getTabuleiro(Tabuleiro),
+    roda_jogo(1, Tabuleiro),
     halt.
 
 menu :-
