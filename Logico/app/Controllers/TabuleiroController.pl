@@ -1,3 +1,9 @@
+:- module('TabuleiroController', [
+    getTabuleiro/1,
+    exibirTabuleiro/1,
+    modificarTabuleiro/4
+    ]).
+
 getTabuleiro(Tabuleiro) :-
     read_file_to_string('../database/tabuleiro.txt', TabuleiroString, []),
     split_string(TabuleiroString, "\n", "", Tabuleiro).

@@ -1,4 +1,5 @@
-:- consult('Controllers/TabuleiroController.pl').
+:- consult('Controllers/TabuleiroController').
+:- consult('Models/Casa').
 
 main :-
     menu(),
