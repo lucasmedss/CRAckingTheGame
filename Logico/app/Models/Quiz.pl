@@ -29,4 +29,5 @@ getQuizAlternativaCasa(IdCasa, IdQuiz, Letra, Alternativa) :-
 
 getRespostaCasa(IdCasa, IdQuiz, Resposta) :-
     getQuizCasa(IdCasa, IdQuiz, Quiz),
-    get_dict(resposta, Quiz, Resposta).
+    get_dict(resposta, Quiz, RespostaQuiz),
+    atom_string(Resposta, RespostaQuiz).
