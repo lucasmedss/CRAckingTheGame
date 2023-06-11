@@ -62,4 +62,4 @@ processar_opcao(_) :-
     menu().
 
 limpar_tela :-
-    write('\e[H\e[2J').
+    write('\033[2J').
