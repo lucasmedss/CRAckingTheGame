@@ -60,6 +60,10 @@ processar_opcao(_) :-
     writeln('Opção inválida! Tente novamente.'),
     sleep(1),
     menu().
-
+    
 limpar_tela :-
-    write('\033[2J').
+    (   current_prolog_flag(windows, true) ->
+        write('\033[2J')
+    ;   tty_clear
+    ).
+
