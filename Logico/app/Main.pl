@@ -1,5 +1,6 @@
 :- consult('Controllers/TabuleiroController').
 :- consult('Models/Casa').
+:- consult('Controllers/JogoController').
 
 main :-
     menu(),
@@ -39,7 +40,8 @@ opcao_valida :-
 processar_opcao(1) :-
     limpar_tela,
     write("Jogar\n"),
-    roda_jogo(1),
+    getTabuleiro(Tabuleiro),
+    roda_jogo(1, Tabuleiro),
     menu().
 
 processar_opcao(2) :-
@@ -63,3 +65,4 @@ esperar_enter :-
     write('Pressione ENTER para prosseguir.'),
     get_char(_),
     nl.
+

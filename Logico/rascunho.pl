@@ -1,35 +1,42 @@
 :- use_module(library(random)).
 :- consult('mode/casa.pl').
 
-roda_jogo(X) :-
-    X =:= 31, % Verifica se X é igual a 31
+roda_jogo(IdCasa) :-
+    IdCasa =:= 33, 
     write('ACABOU O JOGO'), nl.
 
-roda_jogo(X) :-
-    interacao(X, Resultado),
+roda_jogo(IdCasa, Tabuleiro) :-
+    limpar_tela,
+    exibirTabuleiro(Tabuleiro)
+    interacao(IdCasa, Resultado),
     (Resultado == true ->
         roda_dado(Dado),
-        NovoValor is X + Dado,
-        roda_jogo(NovoValor)
+        NovoValor is IdCasa + Dado,
+        modificarTabuleiro(Tabuleiro, "X", NovoValor, NovoTabuleiro),
+        roda_jogo(NovoValor, NovoTabuleiro)
     ;   
-        NovoValor is X-1,
-        roda_jogo(NovoValor)
+        NovoValor is IdCasa-1,
+        modificarTabuleiro(Tabuleiro, "X", NovoValor, NovoTabuleiro),
+        roda_jogo(NovoValor, NovoTabuleiro)
     ).
 
 roda_dado(Resultado) :-
     random(0, 5, Resultado).
 
-seleciona_quiz(Quiz) :-
+seleciona_quiz(IdQuiz) :-
     random(0, 2, Resultado),
 
-interacao(X, Resultado) :-
-    getDescricaoCasa(X, DescricaoCasa),
+interacao(IdCasa, Resultado) :-
+    getDescricaoCasa(IdCasa, DescricaoCasa),
     write(DescricaoCasa),
-    getQuiz(X, Enunciado, Resposta, Interacao), #METODO NÃO EXISTENTE
-    write(Enunciado),
-    (Enunciado == "" ->
-        Resultado is Interacao).! #Break
+    getQuizCasa(IdCasa, IdQuiz, Quiz),
+    %Lógica de casa complementar
+    %(Quiz == "" ->
+    %    Resultado is Interacao).! #Break
+    getQuizPerguntaCasa(IdCasa, IdQuiz, Pergunta),
+    printa_casa(IdCasa, IdQuiz),
     read(RespostaUsuario),
+    getRespostaCasa(IdCasa, IdQuiz, Resposta),
     (RespostaUsuario == Resposta ->
         write("Resposta correta!"),
         Resultado is true
@@ -37,3 +44,16 @@ interacao(X, Resultado) :-
         write("Resposta incorreta!"),
         Resultado is false
     ).
+
+printa_casa(IdCasa, IdQuiz) :-
+    getQuizPerguntaCasa(IdCasa, IdQuiz, Pergunta),
+    writeln(Pergunta),
+    getQuizAlternativaCasa(IdCasa, IdQuiz, a, AlternativaA),
+    writeln(AlternativaA),
+    getQuizAlternativaCasa(IdCasa, IdQuiz, b, AlternativaB),
+    writeln(AlternativaB),
+    getQuizAlternativaCasa(IdCasa, IdQuiz, c, AlternativaC),
+    writeln(AlternativaC),
+    getQuizAlternativaCasa(IdCasa, IdQuiz, d, AlternativaD),
+    writeln(AlternativaD).
+    
