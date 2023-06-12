@@ -1,10 +1,8 @@
-:- module('MenuController', [
-    menu/0,
-    limpar_tela/0
-    ]).
+:- module('MenuController', [menu/0, limpar_tela/0]).
 
 :- use_module('TabuleiroController', [getTabuleiro/1]).
 :- use_module('JogoController', [roda_jogo/2]).
+:- use_module('MultiplayerController', [roda_multiplayer/4]).
 
 menu :-
     limpar_tela,
@@ -47,7 +45,8 @@ processar_opcao('1') :-
 
 processar_opcao('2') :-
     limpar_tela,
-    writeln('Jogar contra o Bot'),
+    getTabuleiro(Tabuleiro),
+    roda_multiplayer(0, 0, _, Tabuleiro),
     menu().
 
 processar_opcao('3') :-
@@ -66,4 +65,3 @@ limpar_tela :-
         write('\033[2J')
     ;   tty_clear
     ).
-

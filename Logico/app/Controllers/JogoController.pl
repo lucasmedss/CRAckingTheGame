@@ -1,4 +1,4 @@
-:- module('JogoController', [roda_jogo/2]).
+:- module('JogoController', [roda_jogo/2, interacao/3, esperar_enter/0, roda_dado/1]).
 
 :- use_module(library(random)).
 :- use_module('Models/Casa', [getNomeCasa/2, getDescricaoCasa/2, getRequisitosCasa/2, isCasaComplementar/1]).
@@ -13,8 +13,6 @@ roda_jogo(0, Tabuleiro) :-
     writeln('Rode o dado para começar o jogo!'),
     esperar_enter,
     roda_dado(Dado),
-    format('Você jogou o dado e irá avançar ~w casas!\n', [Dado]),
-    esperar_enter,
     modificarTabuleiro(Tabuleiro, "X", Dado, NovoTabuleiro),
     roda_jogo(Dado, NovoTabuleiro).
 
@@ -28,18 +26,18 @@ roda_jogo(IdCasa, Tabuleiro) :-
     writeln(DescricaoCasa),
     exibirTabuleiro(Tabuleiro),
     interacao(IdCasa, Resultado, Tabuleiro),
-    (Resultado == true ->
+    (   Resultado == true ->
         roda_dado(Dado),
-        NovoValor is IdCasa + Dado,
-        modificarTabuleiro(Tabuleiro, "X", NovoValor, NovoTabuleiro),
-        roda_jogo(NovoValor, NovoTabuleiro)
-    ;   NovoValor is IdCasa-1,
-        modificarTabuleiro(Tabuleiro, "X", NovoValor, NovoTabuleiro),
-        roda_jogo(NovoValor, NovoTabuleiro)
-    ).
+        NovoValor is IdCasa + Dado
+    ;   NovoValor is IdCasa - 1
+    ),
+    modificarTabuleiro(Tabuleiro, "X", NovoValor, NovoTabuleiro),
+    roda_jogo(NovoValor, NovoTabuleiro).
 
 roda_dado(Resultado) :-
-    random(1, 5, Resultado).
+    random(1, 5, Resultado),
+    format('Você jogou o dado e irá avançar ~w casa(s)!\n', [Resultado]),
+    esperar_enter.
 
 seleciona_quiz(IdQuiz) :-
     random(1, 4, IdQuiz).
@@ -49,11 +47,11 @@ seleciona_acao(Acao) :-
     random(1, 2, Acao). 
 
 seleciona_carta(IdCarta) :-
-    random(1, 13, IdCarta).    
+    random(1, 13, IdCarta).
 
 interacao(IdCasa, Resultado, Tabuleiro) :-
     getDescricaoCasa(IdCasa, DescricaoCasa),
-    write(DescricaoCasa),
+    writeln(DescricaoCasa),
     (   IdCasa = 13 ->
         writeln('Aproveite e siga o jogo!'),
         esperar_enter,
@@ -61,6 +59,7 @@ interacao(IdCasa, Resultado, Tabuleiro) :-
         ;
         (   isCasaComplementar(IdCasa) ->
             seleciona_carta(IdCarta),
+            esperar_enter,
             printa_carta(IdCarta),
             getTipoCarta(IdCarta, TipoCarta),
             (   TipoCarta = "positiva" ->
@@ -74,14 +73,15 @@ interacao(IdCasa, Resultado, Tabuleiro) :-
             ler_resposta(RespostaUsuario),
             getRespostaCasa(IdCasa, IdQuiz, RespostaQuiz),
             (   RespostaUsuario = RespostaQuiz ->
-                writeln('Resposta correta!'),
+                writeln('Resposta correta! Jogue o dado novamente para continuar!'),
+                esperar_enter,
                 Resultado = true
             ;    writeln('Resposta incorreta! Você voltará uma casa!'),
                 esperar_enter,
                 Resultado = false
             )
         )
-    ).    
+    ).
 
 ler_resposta(Resposta) :-
     get_single_char(Code),
@@ -136,7 +136,7 @@ acaoNegativa(IdCasaAtual, Tabuleiro) :-
         modificarTabuleiro(Tabuleiro, "X", IdCasaNovo, NovoTabuleiro),
         roda_jogo(IdCasaNovo, NovoTabuleiro)
     % ; Acao == 2 etcc
-    ).    
+    ).
 
 esperar_enter :-
     writeln('Pressione ENTER para prosseguir.'),
