@@ -1,4 +1,4 @@
-:- module('JogoController', [roda_jogo/3, interacao/5, esperar_enter/0, roda_dado/1]).
+:- module('JogoController', [roda_jogo/3, interacao/4, esperar_enter/0, roda_dado/1]).
 
 :- use_module(library(random)).
 :- use_module('Models/Casa', [getNomeCasa/2, getDescricaoCasa/2, getRequisitosCasa/2, isCasaComplementar/1]).
@@ -7,14 +7,14 @@
 :- use_module('TabuleiroController', [exibirTabuleiro/1, modificarTabuleiro/4]).
 :- use_module('MenuController', [limpar_tela/0]).
 
-roda_jogo(0, Tabuleiro, CadeirasCursadas) :-
+roda_jogo(0, Tabuleiro, _) :-
     writeln('Seja bem-vindo ao CRAcking the Game!'),
     exibirTabuleiro(Tabuleiro),
     writeln('Rode o dado para começar o jogo!'),
     esperar_enter,
     roda_dado(Dado),
     modificarTabuleiro(Tabuleiro, "X", Dado, NovoTabuleiro),
-    roda_jogo(Dado, NovoTabuleiro, CadeirasCursadas).
+    roda_jogo(Dado, NovoTabuleiro, _).
 
 roda_jogo(IdCasa, _, _) :-
     IdCasa =:= 33, 
@@ -25,14 +25,14 @@ roda_jogo(IdCasa, Tabuleiro, CadeirasCursadas) :-
     getDescricaoCasa(IdCasa, DescricaoCasa),
     writeln(DescricaoCasa),
     exibirTabuleiro(Tabuleiro),
-    interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas, NovasCadeiras),
+    interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas),
     (   Resultado == true ->
         roda_dado(Dado),
         NovoValor is IdCasa + Dado
     ;   NovoValor is IdCasa - 1
     ),
     modificarTabuleiro(Tabuleiro, "X", NovoValor, NovoTabuleiro),
-    roda_jogo(NovoValor, NovoTabuleiro, NovasCadeiras).
+    roda_jogo(NovoValor, NovoTabuleiro, CadeirasCursadas).
 
 roda_dado(Resultado) :-
     random(1, 5, Resultado),
@@ -49,14 +49,17 @@ seleciona_acao(Acao) :-
 seleciona_carta(IdCarta) :-
     random(1, 13, IdCarta).
 
-interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas, NovasCadeiras) :-
+adicionar_elemento(Elemento, Lista, NovaLista) :-
+    NovaLista = [Elemento | Lista].
+
+interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas) :-
     getDescricaoCasa(IdCasa, DescricaoCasa),
     getRequisitosCasa(IdCasa, RequisitosCasa),
     getNomeCasa(IdCasa, NomeCasa),
 
     cumpreRequisitos(CadeirasCursadas, RequisitosCasa, CumpriuRequisitos),
     (   CumpriuRequisitos = false ->
-        NovasCadeiras is NomeCasa|CadeirasCursadas,
+        adicionar_elemento(NomeCasa, CadeirasCursadas, NovasCadeiras),
         NovaPosicao is IdCasa - 1,
         modificarTabuleiro(Tabuleiro, "X", NovaPosicao, NovoTabuleiro),
         roda_jogo(NovaPosicao, NovoTabuleiro, NovasCadeiras)
@@ -88,7 +91,8 @@ interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas, NovasCadeiras) :-
                 writeln('Resposta correta! Jogue o dado novamente para continuar!'),
                 esperar_enter,
                 Resultado = true,
-                CadeirasCursadas = NomeCasa|CadeirasCursadas
+                append(CadeirasCursadas, [NomeCasa], CadeirasCursadas),
+
             ;    writeln('Resposta incorreta! Você voltará uma casa!'),
                 esperar_enter,
                 Resultado = false
@@ -156,7 +160,7 @@ esperar_enter :-
     get_single_char(_),
     nl.
 
-cumpreRequisitos(_,[], true).
+cumpreRequisitos(_,[ ], true).
 cumpreRequisitos(CadeirasCursadas, [Requisito|OutrosRequisitos], CumpriuRequisitos) :-
     (   member(Requisito, CadeirasCursadas) ->
         cumpreRequisitos(CadeirasCursadas, OutrosRequisitos, CumpriuRequisitos)
