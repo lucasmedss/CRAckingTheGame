@@ -2,79 +2,79 @@
     {
         "tipo": "positiva",
         "idCarta": 1,
-        "nome": "Minicurso de Linux do PET Computacao",
-        "descricao": "Voce participou do minicurso de linux oferecido pelo PET Computacao e agora sabe nocoes basicas do sistema e de comandos no bash"
+        "nome": "Minicurso de Linux do PET Computação",
+        "descricao": "Você participou do minicurso de linux oferecido pelo PET Computação e agora sabe noções básicas do sistema e de comandos no bash"
     },
     {
         "tipo": "positiva",
         "idCarta": 2,
-        "nome": "Palestra de Carreiras do PET Computacao",
-        "descricao": "Voce participou de uma palestra de carreiras oferecida pelo PET Computacao e respondeu uma pergunta correta do palestrante!"
+        "nome": "Palestra de Carreiras do PET Computação",
+        "descricao": "Você participou de uma palestra de carreiras oferecida pelo PET Computação e respondeu uma pergunta correta do palestrante!"
     },
     {
         "tipo": "negativa",
         "idCarta": 3,
         "nome": "Quioscando",
-        "descricao": "Voce passou tempo demais quioscando em Seu Helio e Seu Olavo nesse periodo e acabou perdendo o tempo de algumas aulas, o que refletiu no seu rendimento!"
+        "descricao": "Você passou tempo demais quioscando em Seu Hélio e Seu Olavo nesse período e acabou perdendo o tempo de algumas aulas, o que refletiu no seu rendimento!"
     },
     {
         "tipo": "positiva",
         "idCarta": 4,
-        "nome": "Cafe com Elas",
-        "descricao": "Voce assistiu a uma mesa redonda promovida pelo Elas Computacao e ficou muito inspirado a atuar mais no ambiente academico de computacao!"
+        "nome": "Café com Elas",
+        "descricao": "Você assistiu a uma mesa redonda promovida pelo Elas Computação e ficou muito inspirado a atuar mais no ambiente acadêmico de computação!"
     },
     {
         "tipo": "positiva",
         "idCarta": 5,
         "nome": "Projetos com a OpenDev",
-        "descricao": "Voce participou do desenvolvimento de alguns projetos open source com a OpenDev e ganhou experiencia com desenvolvimento de software!"
+        "descricao": "Você participou do desenvolvimento de alguns projetos open source com a OpenDev e ganhou experiência com desenvolvimento de software!"
     },
     {
         "tipo": "positiva",
         "idCarta": 6,
         "nome": "Hacktoberfest",
-        "descricao": "Voce passou o dia na universidade participando do Hacktoberfest que a OpenDev promoveu, assistindo minicursos e desenvolvendo projetos open source!"
+        "descricao": "Você passou o dia na universidade participando do Hacktoberfest que a OpenDev promoveu, assistindo minicursos e desenvolvendo projetos open source!"
     },
     {
         "tipo": "negativa",
         "idCarta": 7,
         "nome": "Falha na Montagem",
-        "descricao": "Voce ajudou os Guardians na montagem do LCC0 mas acabou montando um computador com um cabo de forca desfiado que ao conectar na tomada derrubou a energia do predio inteiro!"
+        "descricao": "Você ajudou os Guardians na montagem do LCC0, mas acabou montando um computador com um cabo de força desfiado, que, ao conectar na tomada, derrubou a energia do predio inteiro!"
     },
     {
         "tipo": "positiva",
         "idCarta": 8,
         "nome": "LCC0",
-        "descricao": "Voce participou do LCC0 e ajudou a organizar o evento, ganhando experiência com organização de eventos e com a comunidade de computação!"
+        "descricao": "Você participou do LCC0 e ajudou a organizar o laboratório, ganhando experiência com organização de eventos e com a comunidade de computação!"
     },
     {
         "tipo": "negativa",
         "idCarta": 9,
-        "nome": "Erro de Compilacao",
-        "descricao": "Voce cometeu um erro de compilacao em um trabalho importante e acabou perdendo muitas horas tentando corrigir o problema, atrasando sua entrega e comprometendo sua nota na disciplina!"
+        "nome": "Erro de Compilação",
+        "descricao": "Voce cometeu um erro de compilação em um trabalho importante e acabou perdendo muitas horas tentando corrigir o problema, atrasando sua entrega e comprometendo sua nota na disciplina!"
     },
     {
         "tipo": "positiva",
         "idCarta": 10,
-        "nome": "Olimpiada de Programacao",
-        "descricao": "Voce participou da OBI e aprendeu muito sobre programacao competitiva, ganhando experiencia com algoritmos e estruturas de dados!"
+        "nome": "Olimpíada de Programação",
+        "descricao": "Você participou da OBI e aprendeu muito sobre programação competitiva, ganhando experiência com algoritmos e estruturas de dados!"
     },
     {
         "tipo": "negativa",
         "idCarta": 11,
         "nome": "Plagio",
-        "descricao": "Voce foi acusado de plagio em um trabalho e acabou recebendo uma nota baixa, alem de ter prejudicado sua reputacao com seu professor!"
+        "descricao": "Você foi acusado de plágio em um trabalho e acabou recebendo uma nota baixa, além de ter prejudicado sua reputação com seu professor!"
     },
     {
         "tipo": "positiva",
         "idCarta": 12,
-        "nome": "Participacao no Grupo de Estudos",
-        "descricao": "Voce se juntou a um grupo de estudos e conseguiu tirar duvidas sobre alguns conceitos importantes da disciplina, melhorando seu aprendizado!"
+        "nome": "Participação no Grupo de Estudos",
+        "descricao": "Você se juntou a um grupo de estudos e conseguiu tirar dúvidas sobre alguns conceitos importantes da disciplina, melhorando seu aprendizado!"
     },
     {
         "tipo": "negativa",
         "idCarta": 13,
         "nome": "Problema no Computador",
-        "descricao": "O disco de armazenamento do seu computador pifou e voce perdeu todos os seus arquivos, incluindo alguns prototipos e codigos importantes!"
+        "descricao": "O disco de armazenamento do seu computador pifou e voce perdeu todos os seus arquivos, incluindo alguns protótipos e códigos importantes!"
     }
 ]
