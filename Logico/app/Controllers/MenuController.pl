@@ -1,7 +1,7 @@
 :- module('MenuController', [menu/0, limpar_tela/0]).
 
 :- use_module('TabuleiroController', [getTabuleiro/1]).
-:- use_module('JogoController', [roda_jogo/2]).
+:- use_module('JogoController', [roda_jogo/3]).
 :- use_module('MultiplayerController', [roda_multiplayer/4]).
 
 menu :-
@@ -40,7 +40,7 @@ opcao_valida :-
 processar_opcao('1') :-
     limpar_tela,
     getTabuleiro(Tabuleiro),
-    roda_jogo(0, Tabuleiro),
+    roda_jogo(0, Tabuleiro, []),
     menu().
 
 processar_opcao('2') :-
