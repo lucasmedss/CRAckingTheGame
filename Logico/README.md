@@ -1,13 +1,13 @@
 # 🎮 CRAcking The Game
 
 <p align="justify">
-  Jogo desenvolvido em Haskell para aplicar conceitos aprendidos ao longo da disciplina de Paradigmas de Linguagem de Programação, ministrada pelo Prof. Dr. Everton Leandro Galdino Alves, no Curso Ciência da Computação, do UFCG - Campus Campina Grande, em 2023. O jogo consiste em trilhar as disciplinas obrigatórias de CC para caminhar pelo tabuleiro, passando pelos requistos do caminho.
+  Jogo desenvolvido em Prolog para aplicar conceitos aprendidos ao longo da disciplina de Paradigmas de Linguagem de Programação, ministrada pelo Prof. Dr. Everton Leandro Galdino Alves, no Curso Ciência da Computação, do UFCG - Campus Campina Grande, em 2023. O jogo consiste em trilhar as disciplinas obrigatórias de CC para caminhar pelo tabuleiro, passando pelos requistos do caminho.
 </p>
 
 ## 🚀 Iniciando Paradigma Lógico
 1. É necessário ter uma versão de [Prolog](https://www.swi-prolog.org/ "Página inicial de Prolog") com SWI-PROLOG instalada em sua máquina
   > 💡 Na página de Downloads, há especificaçãod e como instalar em cada sistema  operacional. [SWI-Prolog/Downloads](https://www.swi-prolog.org/Download.html "Página inicial do instalador")
-  
+
 2. Baixe o repositório
  - Usando Git
   ```
@@ -24,9 +24,13 @@
   - Tenha certeza de que está no diretório `CRAckingTheGame/Logico/app`
   - Inicie a execução com o comando `swipl -o -f Main.pl`
   ```
-  cd CRAckingTheGame/Funcional
+  cd CRAckingTheGame/Logico/app
   swipl -o -f Main.pl
   ```
+  > 💡 ou pela própria interface gráfica do SWI-PROLOG
+  - Utilize seu Gerenciador de Arquivos para achar o arquivo [app/Main.pl](./app/Main.pl)
+
+  - Clique com Botão Direito e abra com o aplicativo SWI-PROLOG baixado.
 
 ---
 
