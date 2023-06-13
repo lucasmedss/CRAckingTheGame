@@ -1,4 +1,4 @@
-:- module('JogoController', [roda_jogo/2, interacao/3, esperar_enter/0, roda_dado/1, ler_resposta/1]).
+:- module('JogoController', [roda_jogo/2, seleciona_quiz/1, seleciona_carta/1, printa_casa/2, seleciona_acao/1, esperar_enter/0, roda_dado/1, ler_resposta/1]).
 
 :- use_module(library(random)).
 :- use_module('Models/Casa', [getNomeCasa/2, getDescricaoCasa/2, getRequisitosCasa/2, isCasaComplementar/1]).
