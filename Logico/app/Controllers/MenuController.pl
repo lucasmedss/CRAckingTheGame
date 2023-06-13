@@ -40,7 +40,7 @@ opcao_valida :-
 processar_opcao('1') :-
     limpar_tela,
     getTabuleiro(Tabuleiro),
-    roda_jogo(0, Tabuleiro, [ ]),
+    roda_jogo(0, Tabuleiro, _),
     menu().
 
 processar_opcao('2') :-

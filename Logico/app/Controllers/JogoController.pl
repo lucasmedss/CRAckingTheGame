@@ -14,7 +14,7 @@ roda_jogo(0, Tabuleiro, _) :-
     esperar_enter,
     roda_dado(Dado),
     modificarTabuleiro(Tabuleiro, "X", Dado, NovoTabuleiro),
-    roda_jogo(Dado, NovoTabuleiro, _).
+    roda_jogo(Dado, NovoTabuleiro, []).
 
 roda_jogo(IdCasa, _, _) :-
     IdCasa =:= 33, 
@@ -26,7 +26,7 @@ roda_jogo(IdCasa, Tabuleiro, CadeirasCursadas) :-
     writeln(DescricaoCasa),
     exibirTabuleiro(Tabuleiro),
     interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas),
-    (   Resultado == true ->
+    (   Resultado ->
         roda_dado(Dado),
         NovoValor is IdCasa + Dado
     ;   NovoValor is IdCasa - 1
@@ -56,34 +56,29 @@ interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas) :-
     getDescricaoCasa(IdCasa, DescricaoCasa),
     getRequisitosCasa(IdCasa, RequisitosCasa),
     getNomeCasa(IdCasa, NomeCasa),
-
     cumpreRequisitos(CadeirasCursadas, RequisitosCasa, CumpriuRequisitos),
-    (   CumpriuRequisitos = false ->
-        adicionar_elemento(NomeCasa, CadeirasCursadas, NovasCadeiras),
+    (   CumpriuRequisitos ->
+        writeln('Você cumpriu os requisitos para essa casa!')
+    ;   adicionar_elemento(NomeCasa, CadeirasCursadas, NovasCadeiras),
         NovaPosicao is IdCasa - 1,
         modificarTabuleiro(Tabuleiro, "X", NovaPosicao, NovoTabuleiro),
         roda_jogo(NovaPosicao, NovoTabuleiro, NovasCadeiras)
-        ),
-    
-
+    ),
     writeln(DescricaoCasa),
     (   IdCasa = 13 ->
         writeln('Aproveite e siga o jogo!'),
         esperar_enter,
         Resultado = true
-        ;
-        (   isCasaComplementar(IdCasa) ->
+    ;   (   isCasaComplementar(IdCasa) ->
             seleciona_carta(IdCarta),
             esperar_enter,
             printa_carta(IdCarta),
             getTipoCarta(IdCarta, TipoCarta),
             (   TipoCarta = "positiva" ->
                 acaoPositiva(IdCasa, Tabuleiro, CadeirasCursadas)
-                ;   
-                acaoNegativa(IdCasa, Tabuleiro, CadeirasCursadas)
+            ;   acaoNegativa(IdCasa, Tabuleiro, CadeirasCursadas)
             )
-            ;
-            seleciona_quiz(IdQuiz),
+        ;   seleciona_quiz(IdQuiz),
             printa_casa(IdCasa, IdQuiz),
             ler_resposta(RespostaUsuario),
             getRespostaCasa(IdCasa, IdQuiz, RespostaQuiz),
@@ -91,9 +86,8 @@ interacao(IdCasa, Resultado, Tabuleiro, CadeirasCursadas) :-
                 writeln('Resposta correta! Jogue o dado novamente para continuar!'),
                 esperar_enter,
                 Resultado = true,
-                append(CadeirasCursadas, [NomeCasa], CadeirasCursadas),
-
-            ;    writeln('Resposta incorreta! Você voltará uma casa!'),
+                append(CadeirasCursadas, [NomeCasa], CadeirasCursadas)
+            ;   writeln('Resposta incorreta! Você voltará uma casa!'),
                 esperar_enter,
                 Resultado = false
             )
@@ -141,7 +135,6 @@ acaoPositiva(IdCasaAtual, Tabuleiro, CadeirasCursadas) :-
         esperar_enter,
         modificarTabuleiro(Tabuleiro, "X", IdCasaNovo, NovoTabuleiro),
         roda_jogo(IdCasaNovo, NovoTabuleiro, CadeirasCursadas)
-    % ; acao == 2 etcc etc   
     ).
 
 acaoNegativa(IdCasaAtual, Tabuleiro, CadeirasCursadas) :-
@@ -152,7 +145,6 @@ acaoNegativa(IdCasaAtual, Tabuleiro, CadeirasCursadas) :-
         esperar_enter,
         modificarTabuleiro(Tabuleiro, "X", IdCasaNovo, NovoTabuleiro),
         roda_jogo(IdCasaNovo, NovoTabuleiro, CadeirasCursadas)
-    % ; Acao == 2 etcc
     ).
 
 esperar_enter :-
@@ -160,7 +152,10 @@ esperar_enter :-
     get_single_char(_),
     nl.
 
-cumpreRequisitos(_,[ ], true).
+cumpreRequisitos(_, [], CumpriuRequisitos) :-
+    CumpriuRequisitos = true.
+cumpreRequisitos([], _, CumpriuRequisitos) :-
+    CumpriuRequisitos = true, !.
 cumpreRequisitos(CadeirasCursadas, [Requisito|OutrosRequisitos], CumpriuRequisitos) :-
     (   member(Requisito, CadeirasCursadas) ->
         cumpreRequisitos(CadeirasCursadas, OutrosRequisitos, CumpriuRequisitos)

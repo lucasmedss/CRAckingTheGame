@@ -12,11 +12,10 @@ exibirTabuleiro(Tabuleiro) :-
     maplist(writeln, Tabuleiro).
 
 modificarTabuleiro(Tabuleiro, Jogador, Posicao, NovoTabuleiro) :-
-    (   Posicao > 33 ->
-        ProximaInt = "CC"
-    ;   ProximaInt = Posicao
+    (   Posicao >= 33 ->
+        ProximaPosicao = "CC"
+    ;   format(atom(ProximaPosicao), '~|~`0t~d~2+', [Posicao])
     ),
-    format(atom(ProximaPosicao), '~|~`0t~d~2+', [ProximaInt]),
     getPosicao(Tabuleiro, Jogador, 0, LinhaAtual, ColunaAtual),
     replace(Tabuleiro, LinhaAtual, ColunaAtual, " ", TabuleiroTemp),
     getPosicao(Tabuleiro, ProximaPosicao, 0, LinhaProximo, ColunaProximo),
